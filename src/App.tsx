@@ -1,49 +1,56 @@
 import { Montserrat_400Regular, Montserrat_700Bold, useFonts } from '@expo-google-fonts/montserrat';
 import { ActivityIndicator, useWindowDimensions, View } from "react-native";
-import Welcome from "./welcome/WelcomeBlock";
+import Welcome from "./pages/welcome/WelcomeBlock";
+import DataProvider from './context/DataProvider';
+import genStyle from './GeneralStyles';
+import SingInPage from './pages/registration/SingIn';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { Stack } from './navigation/types';
 
 const App = () => {
-    const { width: screenWidth } = useWindowDimensions();
+    const { width, height } = useWindowDimensions();
+
+    const blockStyle = width >= 450 ? genStyle.bigScreen : genStyle.app__block;
 
     let [fontsLoaded] = useFonts({
         'Montserrat-Regular': Montserrat_400Regular,
         'Montserrat-Bold': Montserrat_700Bold,
     });
 
-    if (!fontsLoaded) {
-        return (
-            <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'rgba(25, 26, 31, 1)'
-            }}>
-                <ActivityIndicator size="large" color="#FFFFFF" />
-            </View>
-        );
-    }
+    // if (!fontsLoaded) {
+    //     return (
+    //         <View style={genStyle.app}>
+    //             <ActivityIndicator size="large" color="#ffffff" />
+    //         </View>
+    //     );
+    // }
 
     return (
-        <View style={{
-                width: '100%',
-                height: '100%',
-                backgroundColor: 'rgba(25, 26, 31, 1)',
+        <DataProvider>
+            <View style={genStyle.app}>
+                <NavigationContainer theme={st.navTheme}>
+                    <View style={blockStyle}>
+                        <Stack.Navigator initialRouteName='welcome' screenOptions={{ headerShown: false }}>
+                            <Stack.Screen name='welcome' component={Welcome} />
+                            <Stack.Screen name='singIn' component={SingInPage} />
+                        </Stack.Navigator>
+                    </View>
+                </NavigationContainer>
 
-                justifyContent: 'center',
-                alignSelf: 'center',
-            }}>
-            <View style={{
-                width: screenWidth > 450 ? '50%' : '100%',
-                height: '100%',
-                backgroundColor: 'rgba(25, 26, 31, 1)',
-
-                justifyContent: 'center',
-                alignSelf: 'center',
-            }}>
-                <Welcome />
             </View>
-        </View>
+        </DataProvider>
     );
+};
+
+const st = {
+    navTheme: {
+        ...DefaultTheme,
+        colors: {
+            ...DefaultTheme.colors,
+            background: 'rgba(25, 26, 31, 1)',
+        },
+    },
+
 };
 
 export default App;
