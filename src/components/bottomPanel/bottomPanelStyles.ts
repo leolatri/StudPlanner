@@ -4,15 +4,17 @@ const st = StyleSheet.create({
     panel: {
         width: '100%',
 
-        paddingHorizontal: '10%',
-        paddingBottom: '10%',
-
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderColor: 'black',
     },
+    panel__arrow: {
+        fontSize: 33,
+        color: 'rgb(255, 255, 255)',
+        textAlign: 'center',
+    },
     panel__bubbles: {
-        width: '35%',
+        width: '45%',
         height: '100%',
 
         justifyContent: 'space-between',
@@ -30,12 +32,6 @@ const st = StyleSheet.create({
     active: {
         backgroundColor: 'rgb(255, 255, 255)',
     },
-    // skip: {
-    //     fontFamily: 'Montserrat-Regular',
-    //     fontSize: 15,
-    //     color: 'rgb(255, 255, 255)',
-    //     fontWeight: '300',
-    // }
 })
 
 export default st;

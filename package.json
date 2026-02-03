@@ -16,17 +16,24 @@
     "build": "npm run build:web && npm run build:apk"
   },
   "dependencies": {
+    "@expo-google-fonts/montserrat": "^0.4.2",
+    "@react-navigation/native": "^6.0.0",
+    "@react-navigation/native-stack": "^6.0.0",
     "expo": "~54.0.32",
+    "expo-linear-gradient": "^15.0.8",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-native-web": "0.21.0",
     "react-native": "0.81.0",
-    "@expo-google-fonts/montserrat": "^0.4.2"
+    "react-native-auto-skeleton": "^0.1.30",
+    "react-native-safe-area-context": "*",
+    "react-native-screens": "*",
+    "react-native-web": "0.21.0",
+    "react-navigation": "^4.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.1.0",
-    "typescript": "~5.9.2",
-    "eas-cli": "^16.0.0"
+    "eas-cli": "^16.0.0",
+    "typescript": "~5.9.2"
   }
 }

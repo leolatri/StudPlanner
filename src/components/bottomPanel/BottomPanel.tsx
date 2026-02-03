@@ -1,31 +1,39 @@
-import { useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import Button from "../button/Button";
 import st from './bottomPanelStyles';
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
+
+
+type Nav = NativeStackNavigationProp<RootStackParamList, "welcome">;
 
 interface Props {
   position: number;
-  setPosition: (position: number) => void;
-}
+  setPosition: (val: number) => void;
+};
+
 const BottomPanel = ({ setPosition, position }: Props) => {
+  const navigation = useNavigation<Nav>();
+  const bubbles = [0, 1, 2, 3];
+
   const clickToNext = () => (
-    position < 3 ? setPosition(position + 1) : console.log('stop')
+    position < 3 ? setPosition(position + 1) : navigation.navigate("singIn")
   );
-  useEffect(() => {
-    console.log(position);
-  }, [position]);
+
+  
   return (
     <View style={st.panel}>
-      {/* <Pressable
-        onPress={() => console.log('skip')}
-      >
-        <Text style={st.skip}>Пропустить</Text>
-      </Pressable> */}
+      {position != 0 &&
+        <Text
+          style={st.panel__arrow}
+          onPress={() => setPosition(position - 1)}>
+            {'<'}
+        </Text>}
       <View style={st.panel__bubbles}>
-        <View style={[st.bubble, position === 0 && st.active]}/>
-        <View style={[st.bubble, position === 1 && st.active]}/>
-        <View style={[st.bubble, position === 2 && st.active]}/>
-        <View style={[st.bubble, position === 3 && st.active]}/>
+        {bubbles.map((el) => (
+          <View style={[st.bubble, position === el && st.active]} />
+        ))}
       </View>
       <Button
         label={position != 3 ? 'Далее' : 'Начать!'}

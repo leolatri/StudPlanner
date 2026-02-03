@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { Image, ImageSourcePropType, Text, useWindowDimensions, View } from "react-native";
-import BottomPanel from "../components/bottomPanel/BottomPanel";
-import genStyle from '../GeneralStyles';
-import book from '../imgs/books.png';
-import boy from '../imgs/boy.png';
-import rocket from '../imgs/rocket.png';
-import timetable from '../imgs/timetable.png';
 import st from "./welcomeStyle";
-
+import { useState } from "react";
+import boy from '../../imgs/boy.png';
+import book from '../../imgs/books.png';
+import rocket from '../../imgs/rocket.png';
+import genStyle from '../../GeneralStyles';
+import timetable from '../../imgs/timetable.png';
+import BottomPanel from "../../components/bottomPanel/BottomPanel";
+import { Image, ImageSourcePropType, Text, useWindowDimensions, View } from "react-native";
 
 
 interface Props {
