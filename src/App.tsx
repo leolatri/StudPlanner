@@ -6,9 +6,10 @@ import genStyle from './GeneralStyles';
 import SingInPage from './pages/registration/SingIn';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { Stack } from './navigation/types';
+import Registration from './pages/registration/Registration';
 
 const App = () => {
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     const blockStyle = width >= 450 ? genStyle.bigScreen : genStyle.app__block;
 
@@ -17,13 +18,13 @@ const App = () => {
         'Montserrat-Bold': Montserrat_700Bold,
     });
 
-    // if (!fontsLoaded) {
-    //     return (
-    //         <View style={genStyle.app}>
-    //             <ActivityIndicator size="large" color="#ffffff" />
-    //         </View>
-    //     );
-    // }
+    if (!fontsLoaded) {
+        return (
+            <View style={genStyle.app}>
+                <ActivityIndicator size="large" color="#ffffff" />
+            </View>
+        );
+    }
 
     return (
         <DataProvider>
@@ -33,6 +34,18 @@ const App = () => {
                         <Stack.Navigator initialRouteName='welcome' screenOptions={{ headerShown: false }}>
                             <Stack.Screen name='welcome' component={Welcome} />
                             <Stack.Screen name='singIn' component={SingInPage} />
+                            <Stack.Screen
+                                name='registration'
+                                component={Registration}
+                                options={{
+                                    headerShown: true,
+                                    headerTintColor: "#fff",
+                                    title: "Регистрация",
+                                    headerShadowVisible: false,
+                                    headerStyle: {backgroundColor: 'transparent'},
+                                    headerTitleStyle: genStyle.title
+                                }}
+                            />
                         </Stack.Navigator>
                     </View>
                 </NavigationContainer>

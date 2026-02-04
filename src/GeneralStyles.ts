@@ -8,14 +8,13 @@ const ganiralStyles = StyleSheet.create({
 
         justifyContent: 'center',
         alignSelf: 'center',
-        overflow: 'scroll',
     },
     app__block: {
         width: '100%',
         height: '100%',
         backgroundColor: 'rgba(25, 26, 31, 1)',
 
-        padding: 30,
+        // padding: 30,
 
         justifyContent: 'center',
         alignSelf: 'center',
@@ -25,7 +24,7 @@ const ganiralStyles = StyleSheet.create({
         height: '100%',
         backgroundColor: 'rgba(25, 26, 31, 1)',
 
-        padding: 30,
+        // padding: 30,
 
         justifyContent: 'center',
         alignSelf: 'center',
@@ -35,7 +34,7 @@ const ganiralStyles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Montserrat-Regular',
-        fontSize: 30,
+        fontSize: 25,
         color: 'rgb(255, 255, 255)',
         fontWeight: '500',
     },
@@ -49,7 +48,7 @@ const ganiralStyles = StyleSheet.create({
     },
     usualText: {
         fontFamily: 'Montserrat-Regular',
-        fontSize: 15,
+        fontSize: 12,
         color: 'rgb(255, 255, 255)',
         fontWeight: '300',
     },

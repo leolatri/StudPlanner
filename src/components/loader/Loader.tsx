@@ -1,5 +1,4 @@
-import { ActivityIndicator, useWindowDimensions, View } from "react-native";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, View , StyleSheet } from "react-native";
 import Skeleton from "./Skeleton";
 
 interface Props {
@@ -26,7 +25,6 @@ const st = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
 
 })
 

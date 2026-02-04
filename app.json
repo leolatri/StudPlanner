@@ -6,7 +6,8 @@
       }
     },
     "android": {
-      "package": "com.alena3003.studplanner"
+      "package": "com.alena3003.studplanner",
+      "softwareKeyboardLayoutMode": "resize",
     }
   }
 }

@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native';
 import generalSt from '../../GeneralStyles';
 
 interface Props{
     label: string;
     func: () => void;
+    style?: StyleProp<ViewStyle>,
+    textStyle?: StyleProp<ViewStyle>, 
 }
 
-const Button = ({label, func}: Props) => {
+const Button = ({label, func, style, textStyle}: Props) => {
   const [isPressed, setIsPressed] = useState(false);
   
   return (
@@ -16,16 +18,16 @@ const Button = ({label, func}: Props) => {
       onPressOut={() => setIsPressed(false)}
       activeOpacity={0.7}
       onPress={func}
-      style={styles.button}
+      style={[st.button, style]}
     >
-      <Text style={generalSt.usualText}>
+      <Text style={[generalSt.usualText, textStyle]}>
         {label}
       </Text>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
+const st = StyleSheet.create({
   button: {
     width: 100,
     height: 50,

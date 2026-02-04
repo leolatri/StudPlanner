@@ -1,4 +1,3 @@
-import st from "./welcomeStyle";
 import { useState } from "react";
 import boy from '../../imgs/boy.png';
 import book from '../../imgs/books.png';
@@ -6,7 +5,7 @@ import rocket from '../../imgs/rocket.png';
 import genStyle from '../../GeneralStyles';
 import timetable from '../../imgs/timetable.png';
 import BottomPanel from "../../components/bottomPanel/BottomPanel";
-import { Image, ImageSourcePropType, Text, useWindowDimensions, View } from "react-native";
+import { Image, ImageSourcePropType, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
 
 interface Props {
@@ -84,6 +83,37 @@ const Welcome = () => {
             />
         </View>
     )
-}
+};
+
+const st = StyleSheet.create({
+    welcome: {
+        width: '100%',
+        height: '100%',
+
+        padding: 25,
+
+        justifyContent: 'center',
+        flexDirection: 'column',
+        marginVertical: 10,
+
+        color: 'wihte',
+        fontSize: 15,
+    },
+    block: {
+        width: '100%',
+        height: '80%',
+
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+    },
+    block__text: {
+        minHeight: '50%',
+        width: '100%',
+
+        justifyContent: 'center',
+    },
+    
+})
 
 export default Welcome;
