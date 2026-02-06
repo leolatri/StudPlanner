@@ -2,10 +2,13 @@ import { StyleSheet, View } from "react-native"
 import Form from "../../components/form/Form";
 import Button from "../../components/button/Button";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useNavigation } from "@react-navigation/native";
+
 
 const Registration = () => {
     const generalFields = ['Фамилия', 'Имя', 'Отчество', 'Почта', 'Пароль'];
     const addFields = ['Номер телефона', 'Телеграм (без @)'];
+    const navigation = useNavigation();
 
     return (
         <KeyboardAwareScrollView
@@ -15,7 +18,6 @@ const Registration = () => {
             enableOnAndroid
             extraScrollHeight={100}
         >
-
             <Form
                 fields={generalFields}
                 sectionName={{ label: 'Обязательные поля', style: st.label }}
@@ -26,7 +28,7 @@ const Registration = () => {
             />
             <Button
                 label={'Сохранить'}
-                func={() => console.log('save')}
+                func={() => navigation.goBack()}
                 style={st.regBlock__button}
             />
             <View style={st.regBlock__add} />
@@ -40,13 +42,14 @@ const st = StyleSheet.create({
         flex: 1,
     },
     contentContainerStyle: {
-        alignItems: 'center',
+        alignItems: "center",
         padding: 25,
+        paddingTop: 0,
         gap: 20,
     },
     regBlock__add: {
         width: '100%',
-        height: 100,
+        height: 50,
     },
     regBlock__button: {
         width: 200,

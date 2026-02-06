@@ -50,14 +50,16 @@ const Skeleton = ({ count }: Props) => {
       StyleSheet.create({
         skeleton: {
           width: "100%",
-          height: height * 0.9,
-          justifyContent: "space-between",
+          // height: height * 0.9,
+
+          justifyContent: "center",
           alignItems: "center",
+          gap: 20,
         },
         item: {
           width: "100%",
           height: (height * 0.7) / safeCount,
-          backgroundColor: "rgb(57, 58, 63)",
+          backgroundColor: "rgba(57, 58, 63, 0.68)",
           borderRadius: 10,
           overflow: "hidden", 
         },
@@ -79,9 +81,9 @@ const Skeleton = ({ count }: Props) => {
         <View style={styles.item} key={i}>
           <AnimatedLG
             colors={[
-              "rgba(255,255,255,0)",
+              "rgba(57, 58, 63, 0.68)",
               "rgba(255,255,255,0.18)",
-              "rgba(255,255,255,0)",
+              "rgba(57, 58, 63, 0.68)",
             ]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}

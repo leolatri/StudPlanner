@@ -1,9 +1,9 @@
 import { View, StyleSheet, Image, KeyboardAvoidingView, Platform } from "react-native";
-import Form from "../../components/form/Form";
-import welcome from '../../imgs/welcome.png';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
+import Form from "../../components/form/Form";
+import welcome from '../../imgs/welcome.png';
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "singIn">;
 
@@ -21,7 +21,7 @@ const SingInPage = () => {
                 <Form
                     fields={fields}
                     sectionName={{ label: "Вход" }}
-                    button={{ label: 'Войти', func: () => console.log('sing in') }}
+                    button={{ label: 'Войти', func: () => navigation.navigate('main') }}
                     additionButton={{ label: 'Регистрация', func: () => navigation.navigate('registration') }}
                     indexPasswordField={1}
                 />

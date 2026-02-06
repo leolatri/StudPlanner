@@ -24,10 +24,8 @@ const BottomPanel = ({ setPosition, position }: Props) => {
   return (
     <View style={st.panel}>
       {position !== 0 &&
-        <Text
-          style={st.panel__arrow}
-          onPress={() => setPosition(position - 1)}>
-          {'←'}
+        <Text style={st.panel__arrow} onPress={() => setPosition(position - 1)}>
+          {'<'}
         </Text>}
       <View style={st.panel__bubbles}>
         {bubbles.map((el) => (
@@ -35,23 +33,17 @@ const BottomPanel = ({ setPosition, position }: Props) => {
         ))}
       </View>
       {position < 3 ?
-        <Text
-          style={st.panel__arrow}
-          onPress={() => setPosition(position + 1)}
-        >
-          {'→'}
+        <Text style={st.panel__arrow} onPress={() => setPosition(position + 1)}>
+          {'>'}
         </Text>
-        : <Button
-          label={'Начать!'}
-          func={clickToNext}
-        />}
+        : <Button label={'Начать!'} func={clickToNext}/>}
     </View>
   )
 };
 
 const st = StyleSheet.create({
   panel: {
-    width: '100%',
+    width: '90%',
 
     flexDirection: 'row',
     gap: 40,
@@ -61,12 +53,12 @@ const st = StyleSheet.create({
     alignItems: 'center',
   },
   panel__arrow: {
-    paddingBottom: 10,
-    fontSize: 40,
+    // width: 50,
+    fontSize: 35,
     color: 'rgb(255, 255, 255)',
   },
   panel__bubbles: {
-    width: '45%',
+    width: '40%',
     height: '100%',
 
     justifyContent: 'space-between',
@@ -75,11 +67,11 @@ const st = StyleSheet.create({
 
   },
   bubble: {
-    width: 20,
-    height: 20,
+    width: 15,
+    height: 15,
 
     borderRadius: 100,
-    backgroundColor: 'rgba(195, 195, 195, 0.58)',
+    backgroundColor: 'rgba(195, 195, 195, 0.39)',
   },
   active: {
     backgroundColor: 'rgb(255, 255, 255)',

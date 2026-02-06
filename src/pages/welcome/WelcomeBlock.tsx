@@ -93,6 +93,7 @@ const st = StyleSheet.create({
         padding: 25,
 
         justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'column',
         marginVertical: 10,
 
