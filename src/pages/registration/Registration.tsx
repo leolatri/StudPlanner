@@ -5,15 +5,25 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useNavigation } from "@react-navigation/native";
 
 
-const Registration = () => {
+interface RegProps {
+    paddingBottom?: number
+}
+
+const Registration = ({ paddingBottom }: RegProps) => {
     const generalFields = ['Фамилия', 'Имя', 'Отчество', 'Почта', 'Пароль'];
     const addFields = ['Номер телефона', 'Телеграм (без @)'];
     const navigation = useNavigation();
 
     return (
         <KeyboardAwareScrollView
-            style={{ flex: 1 }} 
-            contentContainerStyle={st.contentContainerStyle}
+            style={{ flex: 1 }}
+            contentContainerStyle={{
+                alignItems: "center",
+                padding: 25,
+                paddingTop: 0,
+                gap: 20,
+                paddingBottom: paddingBottom || 40,
+            }}
             keyboardShouldPersistTaps="handled"
             enableOnAndroid
             extraScrollHeight={100}
@@ -31,7 +41,6 @@ const Registration = () => {
                 func={() => navigation.goBack()}
                 style={st.regBlock__button}
             />
-            <View style={st.regBlock__add} />
         </KeyboardAwareScrollView>
     )
 };
@@ -40,16 +49,6 @@ const st = StyleSheet.create({
     regBlock: {
         width: '100%',
         flex: 1,
-    },
-    contentContainerStyle: {
-        alignItems: "center",
-        padding: 25,
-        paddingTop: 0,
-        gap: 20,
-    },
-    regBlock__add: {
-        width: '100%',
-        height: 50,
     },
     regBlock__button: {
         width: 200,

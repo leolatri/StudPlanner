@@ -1,19 +1,23 @@
-import { StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import SearchInput from "../../components/input/SearchInput";
 
 const Library = () => {
     return (
-        <KeyboardAwareScrollView>
-            <Text>Library</Text>
+        <View style={st.library}>
+            <SearchInput/>
+            <ScrollView>
+            </ScrollView>
+        </View>
 
-        </KeyboardAwareScrollView>
     )
 };
 
 const st = StyleSheet.create({
-    profile: {
-        // width: '100%',
+    library: {
         flex: 1,
+
+        padding: 20,
 
 
     }

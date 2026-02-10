@@ -5,6 +5,10 @@ export type RootStackParamList = {
     singIn: undefined;
     registration: undefined;
     main: undefined;
+    filterLibrary: undefined;
+    filterContacts: undefined;
+    filterTimetable: undefined;
+
     Details: { id: number };
 };
 

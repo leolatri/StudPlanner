@@ -1,5 +1,8 @@
 {
   "expo": {
+    "name": "СтудПланнер",
+    "slug": "studplanner",
+    "icon": "./src/imgs/IconApp.png",
     "extra": {
       "eas": {
         "projectId": "b767b853-5698-413f-9ee7-94e04a0e08ce"
@@ -7,7 +10,7 @@
     },
     "android": {
       "package": "com.alena3003.studplanner",
-      "softwareKeyboardLayoutMode": "resize",
+      "softwareKeyboardLayoutMode": "resize"
     }
   }
 }

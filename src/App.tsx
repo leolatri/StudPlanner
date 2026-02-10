@@ -45,7 +45,7 @@ const App = () => {
                                     title: "Регистрация",
                                     headerShadowVisible: false,
                                     headerStyle: { backgroundColor: 'transparent' },
-                                    headerTitleStyle: genStyle.title
+                                    headerTitleStyle: genStyle.title,
                                 }}
                             />
                             <Stack.Screen name='main' component={Main}/>

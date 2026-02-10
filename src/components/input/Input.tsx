@@ -1,22 +1,25 @@
-import { View, Text, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet, StyleProp, ViewStyle } from "react-native";
 import React, { useState } from "react";
 
 interface InputProps {
-    label: string;
+    label?: string;
     isPassword?: boolean;
+    placeholder?: string;
 }
 
-const Input = ({label, isPassword}: InputProps) => {
+const Input = ({label, isPassword, placeholder}: InputProps) => {
     const [focused, setFocused] = useState(false);
     return (
         <View style={st.inputBlock}>
-            <Text style={[st.inputBlock__label, focused && {color: 'rgb(255, 255, 255)'}]}>{label}</Text>
+            {label && <Text style={[st.inputBlock__label, focused && {color: 'rgb(255, 255, 255)'}]}>{label}</Text>}
             <TextInput
+                placeholder={placeholder || ""}
                 onFocus={() => setFocused(true)}
                 onBlur={() => setFocused(false)}
-                style={[st.inputBlock__input, focused && {borderColor: "rgb(255, 255, 255)"}]}
                 underlineColorAndroid="transparent"
                 secureTextEntry={isPassword || false}
+                placeholderTextColor={"rgb(88, 88, 88)"}
+                style={[st.inputBlock__input, focused && {borderColor: "rgb(255, 255, 255)"}]}
             />
         </View>
     )
@@ -53,6 +56,7 @@ const st = StyleSheet.create({
         color: 'rgb(255, 255, 255)',
         fontFamily: 'Montserrat-Regular',
         fontSize: 13,
+        outlineColor: "transparent",
     },
 });
 

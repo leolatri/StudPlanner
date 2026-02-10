@@ -1,9 +1,9 @@
 import { useState } from "react";
-import boy from '../../imgs/boy.png';
-import book from '../../imgs/books.png';
-import rocket from '../../imgs/rocket.png';
+import boy from '../../imgs/welcome/boy.png';
+import book from '../../imgs/welcome/books.png';
+import rocket from '../../imgs/welcome/rocket.png';
 import genStyle from '../../GeneralStyles';
-import timetable from '../../imgs/timetable.png';
+import timetable from '../../imgs/welcome/timetable.png';
 import BottomPanel from "../../components/bottomPanel/BottomPanel";
 import { Image, ImageSourcePropType, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
