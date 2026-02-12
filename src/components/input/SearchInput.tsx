@@ -13,7 +13,7 @@ const SearchInput = () => {
             onBlur={() => setActive(false)}
         >
             <Image source={active ? loupeActive : loupe} style={st.search__img}/>
-            <TextInput style={st.search__input}/>
+            <TextInput style={st.search__input} onBlur={() => setActive(false)}/>
         </View>
     )
 };
@@ -21,13 +21,13 @@ const SearchInput = () => {
 const st = StyleSheet.create({
     search: {
         width: '100%',
-        height: 50,
+        height: 40,
 
         padding: 10,
 
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 20,
+        gap: 15,
 
         backgroundColor: 'rgba(38, 42, 53, 1)',
         borderRadius: 10,
@@ -40,6 +40,7 @@ const st = StyleSheet.create({
 
         borderWidth: 0,
         padding: 0,
+        includeFontPadding: false,
 
         color: 'rgb(255, 255, 255)',
         fontFamily: 'Montserrat-Regular',
@@ -47,8 +48,8 @@ const st = StyleSheet.create({
         outlineColor: "transparent",
     },
     search__img: {
-        width: 20,
-        height: 20,
+        width: 17,
+        height: 17,
 
         alignItems: 'center'
     }

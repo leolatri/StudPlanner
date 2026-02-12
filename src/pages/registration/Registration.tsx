@@ -27,6 +27,7 @@ const Registration = ({ paddingBottom }: RegProps) => {
             keyboardShouldPersistTaps="handled"
             enableOnAndroid
             extraScrollHeight={100}
+            showsVerticalScrollIndicator={false}
         >
             <Form
                 fields={generalFields}

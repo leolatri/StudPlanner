@@ -129,7 +129,7 @@ const st = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     headerTitleStyle: {
-        padding: 20,
+        padding: 10,
 
         fontFamily: "Montserrat-Regular",
         fontSize: 20,
@@ -148,7 +148,7 @@ const st = StyleSheet.create({
         width: '100%',
         height: '100%',
 
-        padding: 30,
+        padding: 20,
 
         justifyContent: 'center',
         alignItems: 'flex-end',

@@ -45,6 +45,7 @@ const st = StyleSheet.create({
     },
     inputBlock__input: {
         width: "100%",
+        height: 40,
 
         backgroundColor: "rgba(38, 42, 53, 1)",
 
