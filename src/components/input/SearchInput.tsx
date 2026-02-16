@@ -13,7 +13,12 @@ const SearchInput = () => {
             onBlur={() => setActive(false)}
         >
             <Image source={active ? loupeActive : loupe} style={st.search__img}/>
-            <TextInput style={st.search__input} onBlur={() => setActive(false)}/>
+            <TextInput
+                style={st.search__input}
+                onBlur={() => setActive(false)}
+                placeholder="Поиск"
+                placeholderTextColor={'rgba(148, 148, 148, 0.43)'}
+            />
         </View>
     )
 };

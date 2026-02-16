@@ -5,10 +5,10 @@ import genStyle from '../../GeneralStyles';
 
 interface BookProps {
     name: string;
-    autor: string;
+    autors: string[];
 }
 
-const BookCard = ({ name, autor }: BookProps) => {
+const BookCard = ({ name, autors }: BookProps) => {
     return (
         <View style={st.bookCard}>
             <Image source={pdf} style={{ width: 50, height: 50 }} />
@@ -25,7 +25,7 @@ const BookCard = ({ name, autor }: BookProps) => {
                     numberOfLines={1}
                     ellipsizeMode="tail"
                 >
-                    {autor}
+                    {autors.join(' , ')}
                 </Text>
             </View>
             <Image source={download} style={{ width: 25, height: 25 }} />

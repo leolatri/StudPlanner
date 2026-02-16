@@ -63,7 +63,6 @@ const st = (heightForm?: DimensionValue) => StyleSheet.create({
         minHeight: heightForm || 'auto',
 
         justifyContent: 'center',
-
         gap: 10,
     },
     form__block: {
