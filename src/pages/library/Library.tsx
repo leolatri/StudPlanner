@@ -28,7 +28,7 @@ const st = StyleSheet.create({
         padding: 20,
 
         alignItems: 'center',
-        gap: 25,
+        gap: 20,
     },
     library__button: {
         width: '90%',

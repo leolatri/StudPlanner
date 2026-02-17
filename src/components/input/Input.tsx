@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { View, Text, TextInput, StyleSheet} from "react-native";
 import React, { useState } from "react";
 
 interface InputProps {
@@ -45,7 +45,7 @@ const st = StyleSheet.create({
     },
     inputBlock__input: {
         width: "100%",
-        height: 40,
+        height: 42,
 
         backgroundColor: "rgba(38, 42, 53, 1)",
 
@@ -58,6 +58,9 @@ const st = StyleSheet.create({
         fontFamily: 'Montserrat-Regular',
         fontSize: 13,
         outlineColor: "transparent",
+
+        includeFontPadding: false,
+
     },
 });
 
