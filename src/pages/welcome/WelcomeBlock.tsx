@@ -1,9 +1,9 @@
 import { useState } from "react";
-import boy from '../../imgs/welcome/boy.png';
-import book from '../../imgs/welcome/books.png';
-import rocket from '../../imgs/welcome/rocket.png';
-import genStyle from '../../GeneralStyles';
-import timetable from '../../imgs/welcome/timetable.png';
+import boy from '../../../assets/welcome/boy.png';
+import book from '../../../assets/welcome/books.png';
+import rocket from '../../../assets/welcome/rocket.png';
+import {generalStyles} from '../../GeneralStyles';
+import timetable from '../../../assets/welcome/timetable.png';
 import BottomPanel from "../../components/bottomPanel/BottomPanel";
 import { Image, ImageSourcePropType, StyleSheet, Text, useWindowDimensions, View } from "react-native";
 
@@ -53,8 +53,8 @@ const Block = ({ img, title, text }: Props) => {
                 source={img}
             />
             <View style={st.block__text}>
-                <Text style={genStyle.title}>{title}</Text>
-                <Text style={genStyle.text}>{text}</Text>
+                <Text style={generalStyles.title}>{title}</Text>
+                <Text style={generalStyles.text}>{text}</Text>
             </View>
         </View>
     )

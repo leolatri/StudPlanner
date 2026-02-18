@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/types";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Button from "../button/Button";
+import { colors } from "../../GeneralStyles";
 
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "welcome">;
@@ -55,7 +56,7 @@ const st = StyleSheet.create({
   panel__arrow: {
     // width: 50,
     fontSize: 35,
-    color: 'rgb(255, 255, 255)',
+    color: colors.textWhite,
   },
   panel__bubbles: {
     width: '40%',
@@ -71,10 +72,10 @@ const st = StyleSheet.create({
     height: 15,
 
     borderRadius: 100,
-    backgroundColor: 'rgba(195, 195, 195, 0.39)',
+    backgroundColor: colors.gray,
   },
   active: {
-    backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: colors.textWhite,
   },
 });
 

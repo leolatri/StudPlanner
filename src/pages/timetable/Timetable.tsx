@@ -1,12 +1,12 @@
-import { StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const Timetable = () => {
     return (
-        <KeyboardAwareScrollView>
+        <ScrollView>
             <Text>Timetable</Text>
 
-        </KeyboardAwareScrollView>
+        </ScrollView>
     )
 };
 

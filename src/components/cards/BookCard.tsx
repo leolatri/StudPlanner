@@ -1,20 +1,18 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import download from '../../imgs/download.png';
+import { BookModel } from "../../models/types";
 import pdf from '../../imgs/pdf.png';
-import genStyle from '../../GeneralStyles';
+import { colors } from "../../GeneralStyles";
+import File from '../../../assets/pdf.svg';
+import Dowload from '../../../assets/download.svg';
 
-interface BookProps {
-    name: string;
-    autors: string[];
-}
-
-const BookCard = ({ name, autors }: BookProps) => {
+const BookCard = ({ name, autors }: BookModel) => {
     return (
         <View style={st.bookCard}>
-            <Image source={pdf} style={{ width: 50, height: 50 }} />
+            <File width={50} height={50} fill={colors.generalBlue}/>
             <View style={st.bookCard__textBlock}>
                 <Text
-                    style={[st.bookCard__text, {color: 'rgb(255,255,255)', fontSize: 13}]}
+                    style={[st.bookCard__text, {color: colors.textWhite, fontSize: 13}]}
                     numberOfLines={1}
                     ellipsizeMode="tail"
                 >
@@ -28,7 +26,7 @@ const BookCard = ({ name, autors }: BookProps) => {
                     {autors.join(' , ')}
                 </Text>
             </View>
-            <Image source={download} style={{ width: 25, height: 25 }} />
+            <Dowload  width={25} height={25} stroke={colors.textWhite}/>
         </View>
     )
 };
@@ -44,8 +42,9 @@ const st = StyleSheet.create({
         alignItems: 'center',
         gap: 12,
 
-        backgroundColor: 'rgba(31, 34, 43, 1)',
+        backgroundColor: colors.formBack,
         borderRadius: 10,
+        elevation: 7,
     },
     bookCard__textBlock: {
         width: '65%',
@@ -54,7 +53,7 @@ const st = StyleSheet.create({
     },
     bookCard__text: {
         fontSize: 12,
-        color: 'rgba(101, 101, 101, 1)',
+        color: colors.gray,
         fontFamily: 'Montserrat-Regular',
         includeFontPadding: false,
     }

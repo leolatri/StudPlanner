@@ -1,16 +1,11 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import emailImg from '../../imgs/email.png';
-import chat from '../../imgs/chat/chat.png';
-import arrow from '../../imgs/arrow.png';
+import { ContactModel } from "../../models/types";
+import ChatIcon from '../../../assets/chat.svg';
+import Arrow from '../../../assets/arrow.svg';
+import { colors } from "../../GeneralStyles";
+import EmailImg from '../../../assets/email.svg';
 import React from "react";
 
-interface ContactProps {
-    id: string;
-    img?: ImageSourcePropType;
-    fio: string;
-    email: string;
-    uniSubjects: string[];
-}
 
 const Subjects = ({ arr }: { arr: string[] }) => {
     const count = arr.length - 2;
@@ -30,12 +25,11 @@ const Subjects = ({ arr }: { arr: string[] }) => {
 const Email = ({ email }: { email: string }) => {
     return (
         <View style={st.email}>
-            <Image style={st.icon} source={emailImg} />
+            <EmailImg width={22} height={22} stroke={colors.generalBlue}/>
             <Text style={st.email__text}>{email}</Text>
         </View>
     );
 };
-
 
 const BottomChat = () => {
     const handlePress = () => {
@@ -45,20 +39,16 @@ const BottomChat = () => {
     return (
         <TouchableOpacity style={st.bottomChat} onPress={handlePress}>
             <View style={st.bottomChat__block}>
-                <Image
-                    style={st.icon}
-                    source={chat}
-                />
+                <ChatIcon width={22} height={22} stroke={colors.generalBlue}/>
                 <Text style={st.bottomChat__text}>Оставить отзыв</Text>
             </View>
-            <Image source={arrow} style={{width: 15, height: 15}}/> 
-            {/* <Text style={st.bottomChat__arrow}>{">"}</Text> */}
+            <Arrow width={15} height={15} stroke={colors.generalBlue}/> 
         </TouchableOpacity>
     );
 };
 
 
-const ContactCard = ({ id, img, fio, email, uniSubjects }: ContactProps) => {
+const ContactCard = ({ id, img, fio, email, uniSubjects }: ContactModel) => {
     return (
         <View style={st.contactCard}>
             <View style={st.contactCard__container}>
@@ -78,9 +68,10 @@ const st = StyleSheet.create({
     contactCard: {
         width: "100%",
 
-        backgroundColor: "rgba(31, 34, 43, 1)",
+        backgroundColor: colors.formBack,
         borderRadius: 10,
         overflow: "hidden",
+        elevation: 5,
     },
     contactCard__container: {
         width: "100%",
@@ -100,7 +91,7 @@ const st = StyleSheet.create({
     contactCard__fio: {
         fontFamily: "Montserrat-Regular",
         fontSize: 13,
-        color: 'rgb(255, 255, 255)',
+        color: colors.textWhite,
         fontWeight: '600',
     },
     subjects: {
@@ -119,11 +110,11 @@ const st = StyleSheet.create({
         paddingVertical: 4,
 
         borderRadius: 10,
-        backgroundColor: "rgba(82, 152, 239, 1)",
+        backgroundColor: colors.generalBlue,
 
         fontFamily: "Montserrat-Regular",
         fontSize: 10,
-        color: "rgb(255, 255, 255)",
+        color: colors.textWhite,
         alignSelf: "flex-start",
     },
 
@@ -136,7 +127,7 @@ const st = StyleSheet.create({
     email__text: {
         fontFamily: "Montserrat-Regular",
         fontSize: 12,
-        color: 'rgb(255, 255, 255)',
+        color: colors.textWhite,
         flexWrap: 'wrap'
     },
     bottomChat: {
@@ -150,7 +141,7 @@ const st = StyleSheet.create({
         alignItems: "center",
 
         borderTopWidth: 1,
-        borderTopColor: "rgba(25, 26, 31, 1)",
+        borderTopColor: colors.backgraund,
     },
     bottomChat__block: {
         flexDirection: "row",
@@ -164,11 +155,7 @@ const st = StyleSheet.create({
     bottomChat__text: {
         fontFamily: "Montserrat-Regular",
         fontSize: 12,
-        color: "rgba(82, 152, 239, 1)",
-    },
-    bottomChat__arrow: {
-        fontSize: 20,
-        color: "rgba(82, 152, 239, 1)",
+        color: colors.generalBlue,
     },
     icon: {
         width: 22,

@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import Form from "../../components/form/Form";
-import welcome from '../../imgs/welcome.png';
+import Welcome from '../../../assets/welcome.svg';
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "singIn">;
 
@@ -13,10 +13,7 @@ const SingInPage = () => {
 
     return (
         <View style={st.singIn}>
-            <Image
-                style={st.sinngIn__img}
-                source={welcome}
-            />
+            <Welcome width={150} height={150} style={st.sinngIn__img}/>
             <KeyboardAvoidingView style={st.singIn__keyBord} behavior={Platform.OS === "android" ? "padding" : "height"}>
                 <Form
                     fields={fields}

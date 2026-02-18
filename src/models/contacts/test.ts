@@ -1,9 +1,9 @@
 import { ContactDTO } from "../../api/types";
 import mapperContacts from "./mapper";
-import vor from '../../imgs/test/voron.png';
-import kur from '../../imgs/test/kurav.png';
-import mik from '../../imgs/test/mikh.png';
-import luk from '../../imgs/test/lukin.png';
+import vor from '../../../assets/test/voron.png';
+import kur from '../../../assets/test/kurav.png';
+import mik from '../../../assets/test/mikh.png';
+import luk from '../../../assets/test/lukin.png';
 
 
 

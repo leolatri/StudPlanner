@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native';
-import generalSt from '../../GeneralStyles';
+import {generalStyles, colors} from '../../GeneralStyles';
 
 interface Props{
     label?: string;
@@ -18,7 +18,7 @@ const Button = ({label, func, style, textStyle, icon}: Props) => {
       style={[!icon &&  st.button, style]}
     > 
       {icon && <Image source={icon} style={st.button__icon}/>}
-      {label && <Text style={[generalSt.usualText, textStyle]}>
+      {label && <Text style={[generalStyles.usualText, textStyle]}>
         {label}
       </Text>}
     </TouchableOpacity>
@@ -34,7 +34,7 @@ const st = StyleSheet.create({
     alignItems: 'center',
 
     borderRadius: 15,
-    backgroundColor: '#007aff'
+    backgroundColor: colors.generalBlue,
   },
   button__icon: {
     width: 30,

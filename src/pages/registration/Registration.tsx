@@ -3,6 +3,7 @@ import Form from "../../components/form/Form";
 import Button from "../../components/button/Button";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
+import { colors } from "../../GeneralStyles";
 
 
 interface RegProps {
@@ -57,7 +58,7 @@ const st = StyleSheet.create({
     },
     label: {
         fontSize: 12,
-        color: 'rgb(255, 255, 255)',
+        color: colors.textWhite,
     }
 })
 

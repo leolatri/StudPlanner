@@ -2,17 +2,19 @@ import { Image, StyleSheet, TextInput, View } from "react-native";
 import loupe from '../../imgs/loupe/loupe.png';
 import loupeActive from '../../imgs/loupe/loupe-active.png';
 import React, { useState } from "react";
-
+import { colors } from "../../GeneralStyles";
+import Loupe from '../../../assets/loupe.svg';
 
 const SearchInput = () => {
     const [active, setActive] = useState(false);
     return (
         <View
-            style={[st.search, active && {borderColor: 'rgb(255, 255, 255)'}]}
+            style={[st.search, active && {borderColor: colors.textWhite}]}
             onFocus={() => setActive(true)}
             onBlur={() => setActive(false)}
-        >
-            <Image source={active ? loupeActive : loupe} style={st.search__img}/>
+        >   
+            <Loupe width={17} height={17} rotate={180} fill={active ? colors.textWhite : colors.gray}/>
+
             <TextInput
                 style={st.search__input}
                 onBlur={() => setActive(false)}
@@ -34,10 +36,10 @@ const st = StyleSheet.create({
         alignItems: 'center',
         gap: 15,
 
-        backgroundColor: 'rgba(38, 42, 53, 1)',
+        backgroundColor: colors.textArea,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: 'rgba(88, 88, 88, 0.43)',
+        borderColor: colors.gray,
     },
     search__input: {
         height: '100%',
@@ -47,7 +49,7 @@ const st = StyleSheet.create({
         padding: 0,
         includeFontPadding: false,
 
-        color: 'rgb(255, 255, 255)',
+        color: colors.textWhite,
         fontFamily: 'Montserrat-Regular',
         fontSize: 13,
         outlineColor: "transparent",

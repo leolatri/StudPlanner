@@ -14,3 +14,14 @@ export interface ContactDTO {
     email: string;
     uniSubjects: string[];
 };
+
+export interface SubjectDTO {
+    id: string;
+    type: string;
+    name: string;
+    room: string;
+    index: number;
+    duration: number;
+    professor: string;
+    timeAndDate: number;
+};

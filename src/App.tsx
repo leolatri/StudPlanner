@@ -7,13 +7,14 @@ import Welcome from "./pages/welcome/WelcomeBlock";
 import DataProvider from './context/DataProvider';
 import Loader from './components/loader/Loader';
 import { Stack } from './navigation/types';
-import genStyle from './GeneralStyles';
+import { generalStyles, colors } from './GeneralStyles';
 import Main from './pages/Main';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const App = () => {
     const { width } = useWindowDimensions();
 
-    const blockStyle = width >= 450 ? genStyle.bigScreen : genStyle.app__block;
+    const blockStyle = width >= 450 ? generalStyles.bigScreen : generalStyles.app__block;
 
     let [fontsLoaded] = useFonts({
         'Montserrat-Regular': Montserrat_400Regular,
@@ -22,7 +23,7 @@ const App = () => {
 
     if (!fontsLoaded) {
         return (
-            <View style={genStyle.app}>
+            <View style={generalStyles.app}>
                 <Loader type='circle' />
             </View>
         );
@@ -30,7 +31,13 @@ const App = () => {
 
     return (
         <DataProvider>
-            <View style={genStyle.app}>
+            <LinearGradient
+                colors={['rgba(25, 26, 31, 1)',  'rgba(30, 33, 43, 1)']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+
+                style={generalStyles.app}
+            >
                 <NavigationContainer theme={st.navTheme}>
                     <View style={blockStyle}>
                         <Stack.Navigator initialRouteName='welcome' screenOptions={{ headerShown: false }}>
@@ -45,16 +52,15 @@ const App = () => {
                                     title: "Регистрация",
                                     headerShadowVisible: false,
                                     headerStyle: { backgroundColor: 'transparent' },
-                                    headerTitleStyle: genStyle.title,
+                                    headerTitleStyle: generalStyles.title,
                                 }}
                             />
-                            <Stack.Screen name='main' component={Main}/>
+                            <Stack.Screen name='main' component={Main} />
                         </Stack.Navigator>
 
                     </View>
                 </NavigationContainer>
-
-            </View>
+            </LinearGradient>
         </DataProvider>
     );
 };
@@ -64,7 +70,7 @@ const st = {
         ...DefaultTheme,
         colors: {
             ...DefaultTheme.colors,
-            background: 'rgba(25, 26, 31, 1)',
+           background: 'transparent',
         },
     },
 

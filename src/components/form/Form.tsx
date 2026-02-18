@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import Input from "../input/Input";
 import Button from "../button/Button";
-import ganiralStyles from "../../GeneralStyles";
+import {colors, generalStyles} from "../../GeneralStyles";
 
 interface FormProps {
     fields: string[];
@@ -30,7 +30,7 @@ interface FormProps {
 const Form = ({ fields, button, sectionName, additionButton, indexPasswordField }: FormProps) => {
     return (
         <View style={st('10%').form}>
-            {sectionName && <Text style={[ganiralStyles.title, sectionName.style]}>{sectionName.label}</Text>}
+            {sectionName && <Text style={[generalStyles.title, sectionName.style]}>{sectionName.label}</Text>}
             <View style={st().form__block}>
                 {fields.map((el, index) => (
                     <Input label={el} key={el} isPassword={indexPasswordField === index} />
@@ -74,8 +74,9 @@ const st = (heightForm?: DimensionValue) => StyleSheet.create({
         gap: 10,
         alignItems: 'center',
 
-        backgroundColor: 'rgba(31, 34, 43, 1)',
+        backgroundColor: colors.formBack,
         borderRadius: 10,
+        elevation: 7,
     },
     form__button: {
         width: 200,
@@ -88,7 +89,7 @@ const st = (heightForm?: DimensionValue) => StyleSheet.create({
 
         backgroundColor: 'none',
         fontSize: 12,
-        color: 'rgba(97, 97, 97, 0.79)',
+        color: colors.gray,
     },
 
 });

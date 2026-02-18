@@ -15,7 +15,7 @@ const Library = () => {
                     style={st.library__button}
                 />
                 {Books.map((el, index) => (
-                    <BookCard name={el.name} autors={el.autors} key={index} />
+                    <BookCard id={el.id} name={el.name} autors={el.autors} key={index} />
                 ))}
             </ScrollView>
         </View>

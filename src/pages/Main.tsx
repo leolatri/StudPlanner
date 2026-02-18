@@ -8,9 +8,10 @@ import Library from "./library/Library";
 import Profile from "./profile/Profile";
 import React from "react";
 import Button from "../components/button/Button";
-import filter from '../imgs/filter.png';
+import filter from '../../assets/filter.png';
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/types";
+import { colors } from "../GeneralStyles";
 
 type TabParamList = {
     timetable: undefined;
@@ -119,10 +120,10 @@ const st = StyleSheet.create({
         left: 40,
         right: 40,
 
-        backgroundColor: "rgba(31, 34, 43, 1)",
+        backgroundColor: colors.tabBack,
         borderRadius: 10,
         borderTopWidth: 0,
-        elevation: 20,
+        elevation: 10,
     },
     headerStyle: {
         height: 110,
