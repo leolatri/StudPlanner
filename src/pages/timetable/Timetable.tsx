@@ -1,21 +1,42 @@
-import { ScrollView, StyleSheet, Text } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { subjectsTest } from "../../models/subjects/test";
+import SubjectCard from "../../components/cards/SubjectCard";
+import SearchInput from "../../components/input/SearchInput";
 
 const Timetable = () => {
     return (
-        <ScrollView>
-            <Text>Timetable</Text>
+        <View style={st.timetable}>
+            <SearchInput/>
+            <ScrollView style={{ flex: 1, alignSelf: 'stretch' }} contentContainerStyle={st.timetable__list} showsVerticalScrollIndicator={false}>
+                {subjectsTest.map((el) => (
+                    <SubjectCard
+                        id={el.id}
+                        key={el.id}
+                        type={el.type}
+                        name={el.name}
+                        room={el.room}
+                        index={el.index}
+                        professor={el.professor}
+                        startTime={el.startTime}
+                        endTime={el.endTime}
+                        date={el.date}
+                    />
+                ))}
+            </ScrollView>
+        </View>
 
-        </ScrollView>
     )
 };
 
 const st = StyleSheet.create({
-    profile: {
-        // width: '100%',
+    timetable: {
         flex: 1,
-
-
+        padding: 20,
+        gap: 20,
+    },
+    timetable__list: {
+        paddingBottom: 60,
+        gap: 15,
     }
 });
 

@@ -21,7 +21,6 @@ export interface SubjectModel {
     name: string;
     room: string;
     index: number;
-    duration: number;
     professor: string;
     startTime: string;
     endTime: string;

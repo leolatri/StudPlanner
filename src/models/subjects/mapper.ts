@@ -1,33 +1,50 @@
 import { SubjectDTO } from "../../api/types";
 import { SubjectModel } from "../types";
 
-const parseDate = (fullDate: number, duration?: number) => {
-    const date = new Date(fullDate * 100);
+const parseDate = (fullDate: number, duration?: number, timezone: string = 'UTC') => {
+    const date = new Date(fullDate * 1000);
+    
+    const durationInSeconds = (duration || 90) * 60;
+    
+    const endDate = new Date((fullDate + durationInSeconds) * 1000);
+    console.log(endDate);
 
-    console.log(date);
-    const formatDate = date.toLocaleDateString('ru-Ru');
-    const startTime = date.toLocaleTimeString('ru-Ru');
-    const endTime = new Date((fullDate + (duration || 45)) * 100).toLocaleTimeString('ru-Ru');
+    const formatDate = date.toLocaleDateString('ru-RU');
+    const startTime = date.toLocaleTimeString('ru-RU', { 
+        timeZone: timezone,
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    const endTime = endDate.toLocaleTimeString('ru-RU', { 
+        timeZone: timezone,
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
 
-    return ({
+    console.log('Start:', startTime);
+    console.log('End:', endTime);
+
+    return {
         formatDate,
         startTime,
         endTime,
-    });
+    };
 };
 
 export default function mapperSubject(rowData?: SubjectDTO[]): SubjectModel[] {
     if (!rowData) return [];
 
-    return rowData.map((el) => {
-        const date = parseDate(el.timeAndDate);
+    return rowData.sort((a, b) => a.timeAndDate - b.timeAndDate).map((el) => {
+        const date = parseDate(el.timeAndDate, el.duration, 'Europe/Moscow');
+
+        console.log('date', date);
+
         return ({
             id: el.id,
             type: el.type,
             name: el.name,
             room: el.room,
             index: el.index,
-            duration: el.duration,
             professor: el.professor,
             date: date.formatDate,
             startTime: date.startTime,
