@@ -1,13 +1,13 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { subjectsTest } from "../../models/subjects/test";
 import SubjectCard from "../../components/cards/SubjectCard";
-import SearchInput from "../../components/input/SearchInput";
+import Calendar from "../../components/timetable/Calendar";
 
 const Timetable = () => {
     return (
         <View style={st.timetable}>
-            <SearchInput/>
             <ScrollView style={{ flex: 1, alignSelf: 'stretch' }} contentContainerStyle={st.timetable__list} showsVerticalScrollIndicator={false}>
+                <Calendar/>
                 {subjectsTest.map((el) => (
                     <SubjectCard
                         id={el.id}

@@ -1,10 +1,10 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ContactModel } from "../../models/types";
 import ChatIcon from '../../../assets/chat.svg';
-import Arrow from '../../../assets/arrow.svg';
 import { colors } from "../../GeneralStyles";
 import EmailImg from '../../../assets/email.svg';
 import React from "react";
+import Arrow from "../Arrow";
 
 
 const Subjects = ({ arr }: { arr: string[] }) => {
@@ -42,7 +42,7 @@ const BottomChat = () => {
                 <ChatIcon width={22} height={22} stroke={colors.generalBlue}/>
                 <Text style={st.bottomChat__text}>Оставить отзыв</Text>
             </View>
-            <Arrow width={15} height={15} stroke={colors.generalBlue}/> 
+            <Arrow style={st.arrow} strokeWidth={5}/> 
         </TouchableOpacity>
     );
 };
@@ -161,6 +161,10 @@ const st = StyleSheet.create({
         width: 22,
         height: 22,
     },
+    arrow: {
+        width: 15, 
+        height: 15,
+    }
 
 });
 

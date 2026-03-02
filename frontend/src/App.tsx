@@ -4,7 +4,7 @@ import Registration from './pages/registration/Registration';
 import { useWindowDimensions, View } from "react-native";
 import SingInPage from './pages/registration/SingIn';
 import Welcome from "./pages/welcome/WelcomeBlock";
-import DataProvider from './context/DataProvider';
+import DataProvider from './providers/DataProvider';
 import Loader from './components/loader/Loader';
 import { Stack } from './navigation/types';
 import { generalStyles, colors } from './GeneralStyles';

@@ -4,6 +4,7 @@ import { RootStackParamList } from "../../navigation/types";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Button from "../button/Button";
 import { colors } from "../../GeneralStyles";
+import Arrow from "../Arrow";
 
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "welcome">;
@@ -25,19 +26,27 @@ const BottomPanel = ({ setPosition, position }: Props) => {
   return (
     <View style={st.panel}>
       {position !== 0 &&
-        <Text style={st.panel__arrow} onPress={() => setPosition(position - 1)}>
-          {'<'}
-        </Text>}
+        <Arrow
+          color={colors.textWhite}
+          style={st.arrow}
+          rotate={180}
+          strokeWidth={8}
+          func={() => setPosition(position - 1)}
+        />
+      }
       <View style={st.panel__bubbles}>
         {bubbles.map((el) => (
           <View style={[st.bubble, position === el && st.active]} key={el} />
         ))}
       </View>
       {position < 3 ?
-        <Text style={st.panel__arrow} onPress={() => setPosition(position + 1)}>
-          {'>'}
-        </Text>
-        : <Button label={'Начать!'} func={clickToNext}/>}
+        <Arrow
+          color={colors.textWhite}
+          style={st.arrow}
+          strokeWidth={8}
+          func={() => setPosition(position + 1)}
+        />
+        : <Button label={'Начать!'} func={clickToNext} />}
     </View>
   )
 };
@@ -77,6 +86,10 @@ const st = StyleSheet.create({
   active: {
     backgroundColor: colors.textWhite,
   },
+  arrow: {
+    width: 20,
+    height: 20,
+  }
 });
 
 export default BottomPanel;
