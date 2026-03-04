@@ -2,7 +2,7 @@
   "expo": {
     "name": "СтудПланнер",
     "slug": "studplanner",
-    "icon": "./src/imgs/IconApp.png",
+    "icon": "./assets/IconApp.png",
     "extra": {
       "eas": {
         "projectId": "b767b853-5698-413f-9ee7-94e04a0e08ce"

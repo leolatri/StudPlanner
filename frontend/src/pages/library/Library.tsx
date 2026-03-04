@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import SearchInput from "../../components/input/SearchInput";
 import Button from "../../components/button/Button";
 import BookCard from "../../components/cards/BookCard";
@@ -8,17 +8,29 @@ const Library = () => {
     return (
         <View style={st.library}>
             <SearchInput />
-            <ScrollView style={{ flex: 1, alignSelf: 'stretch' }} contentContainerStyle={st.library__list} showsVerticalScrollIndicator={false}>
-                <Button
-                    label="Добавить материал"
-                    func={() => console.log('add material')}
-                    style={st.library__button}
-                />
-                {Books.map((el, index) => (
-                    <BookCard id={el.id} name={el.name} autors={el.autors} key={index} />
-                ))}
-            </ScrollView>
-        </View>
+            <FlatList
+                style={{ flex: 1, alignSelf: 'stretch' }}
+                contentContainerStyle={st.library__list}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={(item) => item.id}
+                data={Books}
+                // ListEmptyComponent={}
+                ListHeaderComponent={
+                    <Button
+                        label="Добавить материал"
+                        func={() => console.log('add material')}
+                        style={st.library__button}
+                    />
+                }
+                renderItem={({ item }) => (
+                    <BookCard
+                        id={item.id}
+                        name={item.name}
+                        autors={item.autors}
+                    />
+                )}
+            />
+        </View >
     )
 };
 

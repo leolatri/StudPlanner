@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 const titles = {
     timetable: "РАСПИСАНИЕ",
-    contacts: "КОНТАКТЫ",
+    contacts: "ПРЕПОДАВАТЕЛИ",
     library: "БИБЛИОТЕКА",
     profile: "ПРОФИЛЬ",
 } as const;
@@ -82,15 +82,6 @@ const Main = () => {
             <Tab.Screen
                 name="contacts"
                 component={Contacts}
-                options={() => ({
-                    headerRight: () => (
-                        <Button
-                            icon={filter}
-                            func={() => navigation.navigate("filterContacts")}
-                            style={st.filter}
-                        />
-                    )
-                })}
             />
             <Tab.Screen
                 name="library"

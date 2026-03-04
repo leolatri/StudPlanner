@@ -52,14 +52,17 @@ const Calendar = () => {
         const result = new Date(date);
         const day = date.getDay();
         const diff = day === 0 ? -6 : 1 - day;
+
         result.setDate(date.getDate() + diff);
         result.setHours(0, 0, 0, 0);
+
         return result;
     };
 
     const generateDateRange = (start: Date, end: Date): Date[] => {
         const dates: Date[] = [];
         const current = new Date(start);
+
         while (current <= end) {
             dates.push(new Date(current));
             current.setDate(current.getDate() + 1);
@@ -73,10 +76,10 @@ const Calendar = () => {
         const firstDayOfMonth = new Date(year, month, 1);
         const startDate = getMondayOfWeek(firstDayOfMonth);
         const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + 41); 
+        endDate.setDate(startDate.getDate() + 41);
 
         const existingDaysSet = new Set(
-            originalDays.map(day => `${day.year}-${day.month}-${day.date}`)
+            originalDays.map((day) => `${day.year}-${day.month}-${day.date}`)
         );
 
         const allDatesInRange = generateDateRange(startDate, endDate);
@@ -91,7 +94,7 @@ const Calendar = () => {
 
             if (existingDaysSet.has(key)) {
                 const existing = originalDays.find(
-                    d => d.year === year && d.month === month && d.date === dayDate
+                    (d) => d.year === year && d.month === month && d.date === dayDate
                 );
                 if (existing) {
                     allDays.push({
@@ -140,11 +143,11 @@ const Calendar = () => {
             .sort((a, b) => a.startDate.getTime() - b.startDate.getTime());
 
         return weeks;
-    }, [originalDays, year, month]); 
+    }, [originalDays, year, month]);
 
     const visibleWeeks = useMemo((): CalendarWeek[] => {
-        return calendarWeeks.filter(week =>
-            week.days.some(day => day && day.month === month)
+        return calendarWeeks.filter((week) =>
+            week.days.some((day) => day && day.month === month)
         );
     }, [calendarWeeks, month]);
 
@@ -152,12 +155,14 @@ const Calendar = () => {
         const today = new Date();
         let targetDate: Date | null = null;
 
-        
+
         for (let i = 0; i < originalDays.length; i++) {
             const date = new Date(originalDays[i].year, originalDays[i].month, originalDays[i].date);
             if (isDateSelected(date)) {
                 targetDate = date;
                 break;
+            } else {
+                targetDate = new Date(year, month, 1);
             }
         }
 

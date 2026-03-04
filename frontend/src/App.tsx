@@ -10,6 +10,7 @@ import { Stack } from './navigation/types';
 import { generalStyles, colors } from './GeneralStyles';
 import Main from './pages/Main';
 import { LinearGradient } from 'expo-linear-gradient';
+import TimetableFilter from './pages/filter/TimetableFilter';
 
 const App = () => {
     const { width } = useWindowDimensions();
@@ -48,14 +49,26 @@ const App = () => {
                                 component={Registration}
                                 options={{
                                     headerShown: true,
-                                    headerTintColor: "#fff",
-                                    title: "Регистрация",
+                                    headerTintColor: colors.textWhite,
+                                    title: "РЕГИСТРАЦИЯ",
                                     headerShadowVisible: false,
                                     headerStyle: { backgroundColor: 'transparent' },
-                                    headerTitleStyle: generalStyles.title,
+                                    headerTitleStyle: [generalStyles.title, {fontSize: 20}],
                                 }}
                             />
                             <Stack.Screen name='main' component={Main} />
+                            <Stack.Screen
+                                name='filterTimetable'
+                                component={TimetableFilter}
+                                options={{
+                                    headerShown: true,
+                                    title: 'ФИЛЬТР',
+                                    headerTintColor: colors.textWhite,
+                                    headerShadowVisible: false,
+                                    headerStyle: {backgroundColor: 'transparent'},
+                                    headerTitleStyle: [generalStyles.title, {fontSize: 20}],
+                                }}
+                            />
                         </Stack.Navigator>
 
                     </View>
