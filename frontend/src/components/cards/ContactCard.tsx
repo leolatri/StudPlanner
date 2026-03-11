@@ -1,7 +1,7 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ContactModel } from "../../models/types";
 import ChatIcon from '../../../assets/chat.svg';
-import { colors } from "../../GeneralStyles";
+import { colors, generalStyles } from "../../GeneralStyles";
 import EmailImg from '../../../assets/email.svg';
 import React from "react";
 import Arrow from "../Arrow";
@@ -26,7 +26,7 @@ const Email = ({ email }: { email: string }) => {
     return (
         <View style={st.email}>
             <EmailImg width={22} height={22} stroke={colors.generalBlue}/>
-            <Text style={st.email__text}>{email}</Text>
+            <Text style={[generalStyles.text, {fontSize: 12}]}>{email}</Text>
         </View>
     );
 };
@@ -40,7 +40,7 @@ const BottomChat = () => {
         <TouchableOpacity style={st.bottomChat} onPress={handlePress}>
             <View style={st.bottomChat__block}>
                 <ChatIcon width={22} height={22} stroke={colors.generalBlue}/>
-                <Text style={st.bottomChat__text}>Оставить отзыв</Text>
+                <Text style={[generalStyles.text, {fontSize: 12, color: colors.generalBlue}]}>Оставить отзыв</Text>
             </View>
             <Arrow style={st.arrow} strokeWidth={5}/> 
         </TouchableOpacity>
@@ -124,12 +124,6 @@ const st = StyleSheet.create({
         gap: 15,
         alignItems: 'center',
     },
-    email__text: {
-        fontFamily: "Montserrat-Regular",
-        fontSize: 12,
-        color: colors.textWhite,
-        flexWrap: 'wrap'
-    },
     bottomChat: {
         width: "100%",
         
@@ -151,11 +145,6 @@ const st = StyleSheet.create({
     bottomChat__icon: {
         width: 22,
         height: 22,
-    },
-    bottomChat__text: {
-        fontFamily: "Montserrat-Regular",
-        fontSize: 12,
-        color: colors.generalBlue,
     },
     icon: {
         width: 22,

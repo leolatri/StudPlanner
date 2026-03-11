@@ -53,8 +53,8 @@ const Block = ({ img, title, text }: Props) => {
                 source={img}
             />
             <View style={st.block__text}>
-                <Text style={generalStyles.title}>{title}</Text>
-                <Text style={generalStyles.text}>{text}</Text>
+                <Text style={[generalStyles.title, {fontSize: 25}]}>{title}</Text>
+                <Text style={[generalStyles.text, {paddingTop: 25}]}>{text}</Text>
             </View>
         </View>
     )

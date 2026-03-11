@@ -10,7 +10,11 @@ import { Stack } from './navigation/types';
 import { generalStyles, colors } from './GeneralStyles';
 import Main from './pages/Main';
 import { LinearGradient } from 'expo-linear-gradient';
-import TimetableFilter from './pages/filter/TimetableFilter';
+import TimetableFilter from './pages/filter/timetable/TimetableFilter';
+import { groupList, groupsTest } from './testData';
+import GroupSearchPage from './pages/filter/timetable/GroupSearchPage';
+import LibraryFilter from './pages/filter/library/FilterLibrary';
+import AddMaterial from './pages/library/AddMaterial';
 
 const App = () => {
     const { width } = useWindowDimensions();
@@ -52,21 +56,57 @@ const App = () => {
                                     headerTintColor: colors.textWhite,
                                     title: "РЕГИСТРАЦИЯ",
                                     headerShadowVisible: false,
-                                    headerStyle: { backgroundColor: 'transparent' },
-                                    headerTitleStyle: [generalStyles.title, {fontSize: 20}],
+                                    headerStyle: { backgroundColor: colors.backgraund},
+                                    headerTitleStyle: generalStyles.title,
                                 }}
                             />
                             <Stack.Screen name='main' component={Main} />
                             <Stack.Screen
                                 name='filterTimetable'
-                                component={TimetableFilter}
+                                component={() => <TimetableFilter selectedGroups={groupsTest}/>}
                                 options={{
                                     headerShown: true,
                                     title: 'ФИЛЬТР',
                                     headerTintColor: colors.textWhite,
                                     headerShadowVisible: false,
-                                    headerStyle: {backgroundColor: 'transparent'},
-                                    headerTitleStyle: [generalStyles.title, {fontSize: 20}],
+                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerTitleStyle: generalStyles.title,
+                                }}
+                            />
+                            <Stack.Screen
+                                name='groupSearchPage'
+                                component={() => <GroupSearchPage groupList={groupList}/>}
+                                options={{
+                                    headerShown: true,
+                                    title: 'ПОИСК ГРУПП',
+                                    headerTintColor: colors.textWhite,
+                                    headerShadowVisible: false,
+                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerTitleStyle: generalStyles.title,
+                                }}
+                            />
+                            <Stack.Screen
+                                name='filterLibrary'
+                                component={LibraryFilter}
+                                options={{
+                                    headerShown: true,
+                                    title: 'ФИЛЬТР',
+                                    headerTintColor: colors.textWhite,
+                                    headerShadowVisible: false,
+                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerTitleStyle: generalStyles.title,
+                                }}
+                            />
+                            <Stack.Screen
+                                name='addMaterial'
+                                component={AddMaterial}
+                                options={{
+                                    headerShown: true,
+                                    title: 'ДОБАВИТЬ МАТЕРИАЛ',
+                                    headerTintColor: colors.textWhite,
+                                    headerShadowVisible: false,
+                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerTitleStyle: generalStyles.title,
                                 }}
                             />
                         </Stack.Navigator>
@@ -83,7 +123,7 @@ const st = {
         ...DefaultTheme,
         colors: {
             ...DefaultTheme.colors,
-           background: 'transparent',
+           background: colors.backgraund,
         },
     },
 

@@ -3,8 +3,15 @@ import SearchInput from "../../components/input/SearchInput";
 import Button from "../../components/button/Button";
 import BookCard from "../../components/cards/BookCard";
 import { Books } from "../../models/library/test";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
+import { useNavigation } from "@react-navigation/native";
+
+type Nav = NativeStackNavigationProp<RootStackParamList, "filterLibrary">;
 
 const Library = () => {
+    const navigation = useNavigation<Nav>();
+
     return (
         <View style={st.library}>
             <SearchInput />
@@ -18,7 +25,7 @@ const Library = () => {
                 ListHeaderComponent={
                     <Button
                         label="Добавить материал"
-                        func={() => console.log('add material')}
+                        func={() => navigation.navigate('addMaterial')}
                         style={st.library__button}
                     />
                 }

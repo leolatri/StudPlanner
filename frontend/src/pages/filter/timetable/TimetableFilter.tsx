@@ -1,8 +1,13 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import { colors } from "../../GeneralStyles";
-import Cross from '../../../assets/cross.svg';
-import Button from "../../components/button/Button";
+import { colors, generalStyles } from "../../../GeneralStyles";
+import Cross from '../../../../assets/cross.svg';
+import Button from "../../../components/button/Button";
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../../navigation/types";
+import { useNavigation } from "@react-navigation/native";
+
+type Nav = NativeStackNavigationProp<RootStackParamList, "filterTimetable">;
 
 interface GroupProps {
     id: number;
@@ -22,7 +27,7 @@ const GroupItem = ({ id, name, setActive, isActive, onRemove }: GroupProps) => {
             onPress={() => setActive(id)}
             style={[st.groupItem, isActive && st["groupItem--active"]]}
         >
-            <Text style={st.groupItem__text}>{name}</Text>
+            <Text style={generalStyles.text}>{name}</Text>
             <TouchableOpacity
                 onPress={() => handleRemovePress(id)}
                 hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
@@ -33,12 +38,10 @@ const GroupItem = ({ id, name, setActive, isActive, onRemove }: GroupProps) => {
     );
 };
 
-const groupsTest = ['ИТ-МО22', '22ИТ-ПИП-СБД', '23ИТ-СБД-МО'];
-
-
-const TimetableFilter = () => {
+const TimetableFilter = ({selectedGroups}: {selectedGroups: string[]}) => {
     const [activeGroupIndex, setActive] = useState<number | null>(null);
-    const [groups, setGroups] = useState<string[]>(groupsTest);
+    const [groups, setGroups] = useState<string[]>(selectedGroups);
+    const navigation = useNavigation<Nav>();
 
 
     const removeGroup = useCallback((index: number) => {
@@ -57,7 +60,7 @@ const TimetableFilter = () => {
 
     return (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={st.filter}>
-            <Text style={[st.groupItem__text, { fontSize: 12, alignSelf: 'flex-start' }]}>ГРУППЫ</Text>
+            <Text style={[generalStyles.text, { fontSize: 12, alignSelf: 'flex-start' }]}>ГРУППЫ</Text>
             {groups.map((el, index) => (
                 <GroupItem
                     id={index}
@@ -70,7 +73,7 @@ const TimetableFilter = () => {
             ))}
             <Button
                 label="Добавить группу"
-                func={() => console.log("add group")}
+                func={() => navigation.navigate('groupSearchPage')}
                 style={st.filter__button}
             />
 
@@ -96,12 +99,6 @@ const st = StyleSheet.create({
     "groupItem--active": {
         borderWidth: 1,
         borderColor: colors.textWhite,
-    },
-    groupItem__text: {
-        fontFamily: 'Montserrat-Regular',
-        color: colors.textWhite,
-        fontWeight: '500',
-        fontSize: 20,
     },
     groupItem__cross: {
         width: 15,

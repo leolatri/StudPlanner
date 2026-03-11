@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import download from '../../imgs/download.png';
 import { BookModel } from "../../models/types";
 import pdf from '../../imgs/pdf.png';
-import { colors } from "../../GeneralStyles";
+import { colors, generalStyles } from "../../GeneralStyles";
 import File from '../../../assets/pdf.svg';
 import Dowload from '../../../assets/download.svg';
 
@@ -12,7 +12,7 @@ const BookCard = ({ name, autors }: BookModel) => {
             <File width={50} height={50} fill={colors.generalBlue}/>
             <View style={st.bookCard__textBlock}>
                 <Text
-                    style={[st.bookCard__text, {color: colors.textWhite, fontSize: 13}]}
+                    style={[generalStyles.text, {fontSize: 13}]}
                     numberOfLines={1}
                     ellipsizeMode="tail"
                 >

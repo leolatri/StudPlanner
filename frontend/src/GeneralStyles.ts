@@ -24,9 +24,6 @@ export const generalStyles = StyleSheet.create({
     app__block: {
         width: '100%',
         height: '100%',
-        // backgroundColor: colors.backgraund,
-
-        // padding: 30,
 
         justifyContent: 'center',
         alignSelf: 'center',
@@ -34,10 +31,7 @@ export const generalStyles = StyleSheet.create({
     bigScreen: {
         width: '40%',
         height: '100%',
-        // backgroundColor: colors.backgraund,
-
-        // padding: 30,
-
+        
         justifyContent: 'center',
         alignSelf: 'center',
     },
@@ -46,12 +40,11 @@ export const generalStyles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Montserrat-Regular',
-        fontSize: 25,
+        fontSize: 20,
         color: colors.textWhite,
         fontWeight: '500',
     },
     text: {
-        paddingTop: 25,
         fontFamily: 'Montserrat-Regular',
         fontSize: 16,
         color: colors.textWhite,

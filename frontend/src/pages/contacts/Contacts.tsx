@@ -36,8 +36,6 @@ const st = StyleSheet.create({
         gap: 20,
     },
     contacts_list: {
-        overflow: 'scroll',
-
         paddingTop: 20,
         paddingBottom: 80,
 
