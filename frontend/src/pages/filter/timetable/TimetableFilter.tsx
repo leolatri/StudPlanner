@@ -1,4 +1,5 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { observer } from 'mobx-react-lite';
 import { colors, generalStyles } from "../../../GeneralStyles";
 import Cross from '../../../../assets/cross.svg';
 import Button from "../../../components/button/Button";
@@ -6,19 +7,20 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
+import { useStore } from "../../../stores/StoreContext";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterTimetable">;
 
 interface GroupProps {
-    id: number;
+    id: string;
     name: string;
     isActive: boolean;
-    setActive: (val: number) => void;
-    onRemove: (val: number) => void;
+    setActive: (val: string) => void;
+    onRemove: (val: string) => void;
 }
 
 const GroupItem = ({ id, name, setActive, isActive, onRemove }: GroupProps) => {
-    const handleRemovePress  = (id: number) => {
+    const handleRemovePress = (id: string) => {
         console.log(id);
         onRemove(id);
     }
@@ -38,35 +40,39 @@ const GroupItem = ({ id, name, setActive, isActive, onRemove }: GroupProps) => {
     );
 };
 
-const TimetableFilter = ({selectedGroups}: {selectedGroups: string[]}) => {
-    const [activeGroupIndex, setActive] = useState<number | null>(null);
-    const [groups, setGroups] = useState<string[]>(selectedGroups);
+const TimetableFilter = observer(() => {
+    const [activeGroupIndex, setActive] = useState<string | null>(null);
+    const { userStore } = useStore();
+    let userGroups = userStore.user?.addData.gropList;
+
+    console.log('log2:', userGroups);
     const navigation = useNavigation<Nav>();
 
 
-    const removeGroup = useCallback((index: number) => {
-        setGroups((prev: string[]) => {
-            const newGroups = prev.filter((_, i) => i !== index);
+
+    const removeGroup = useCallback((id: string) => {
+        if (userGroups && userStore.user) {
+            const newGroups = userGroups.filter((el) => el.id !== id);
+            userGroups = newGroups;
+            userStore.user.addData.gropList = newGroups;
+
             if (activeGroupIndex !== null) {
-                if (activeGroupIndex === index) {
+                if (activeGroupIndex === id) {
                     setActive(null);
-                } else if (activeGroupIndex > index) {
-                    setActive(activeGroupIndex - 1);
                 }
             }
-            return newGroups;
-        });
-    }, [activeGroupIndex]);
+        }
+    }, [activeGroupIndex, userStore.user]);
 
     return (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={st.filter}>
             <Text style={[generalStyles.text, { fontSize: 12, alignSelf: 'flex-start' }]}>ГРУППЫ</Text>
-            {groups.map((el, index) => (
+            {userGroups?.map((el) => (
                 <GroupItem
-                    id={index}
-                    key={index}
-                    name={el}
-                    isActive={activeGroupIndex === index}
+                    id={el.id}
+                    key={el.id}
+                    name={el.name}
+                    isActive={activeGroupIndex === el.id}
                     setActive={setActive}
                     onRemove={removeGroup}
                 />
@@ -79,7 +85,7 @@ const TimetableFilter = ({selectedGroups}: {selectedGroups: string[]}) => {
 
         </ScrollView>
     )
-};
+});
 
 const st = StyleSheet.create({
     groupItem: {
@@ -122,4 +128,4 @@ const st = StyleSheet.create({
 
 })
 
-export default memo(TimetableFilter);
+export default TimetableFilter;

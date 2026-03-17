@@ -2,15 +2,16 @@ import { FlatList, StyleSheet, View } from "react-native";
 import SearchInput from "../../components/input/SearchInput";
 import Button from "../../components/button/Button";
 import BookCard from "../../components/cards/BookCard";
-import { Books } from "../../models/library/test";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
+import { useStore } from "../../stores/StoreContext";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterLibrary">;
 
 const Library = () => {
     const navigation = useNavigation<Nav>();
+    const {libraryStore} = useStore();
 
     return (
         <View style={st.library}>
@@ -20,7 +21,7 @@ const Library = () => {
                 contentContainerStyle={st.library__list}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
-                data={Books}
+                data={libraryStore.books}
                 // ListEmptyComponent={}
                 ListHeaderComponent={
                     <Button
@@ -34,6 +35,7 @@ const Library = () => {
                         id={item.id}
                         name={item.name}
                         autors={item.autors}
+                        isPersonal={item.isPersonal}
                     />
                 )}
             />

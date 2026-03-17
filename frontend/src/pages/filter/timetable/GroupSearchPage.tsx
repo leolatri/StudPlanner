@@ -2,6 +2,8 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native
 import SearchInput from "../../../components/input/SearchInput";
 import { colors, generalStyles } from "../../../GeneralStyles";
 import { memo } from "react";
+import { useStore } from "../../../stores/StoreContext";
+import { observer } from "mobx-react-lite";
 
 const GroupItem = ({ groupName }: { groupName: string }) => (
     <TouchableOpacity style={st.groupItem}>
@@ -9,23 +11,26 @@ const GroupItem = ({ groupName }: { groupName: string }) => (
     </TouchableOpacity>
 )
 
-const GroupSearchPage = ({ groupList }: { groupList: string[] }) => {
+const GroupSearchPage = observer(() => {
+    const { groupsStors }  = useStore();
+    console.log(groupsStors);
+
     return (
         <View style={st.container}>
             <SearchInput />
             <FlatList
-                data={groupList}
-                style={{flex: 1}}
+                data={groupsStors.groups}
+                style={{ flex: 1 }}
                 keyExtractor={(item) => item + "123"}
                 renderItem={({ item }) => (
-                    <GroupItem groupName={item} />
+                    <GroupItem groupName={item.name} />
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={st.container__list}
             />
         </View>
     )
-};
+});
 
 const st = StyleSheet.create({
     groupItem: {

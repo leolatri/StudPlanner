@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native';
+import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
 import {generalStyles, colors} from '../../GeneralStyles';
 
 interface Props{
@@ -7,7 +7,7 @@ interface Props{
     func: () => void;
     icon?: ImageSourcePropType,
     style?: StyleProp<ViewStyle>,
-    textStyle?: StyleProp<ViewStyle>,
+    textStyle?: StyleProp<TextStyle>,
 }
 
 const Button = ({label, func, style, textStyle, icon}: Props) => {

@@ -4,6 +4,7 @@ export interface BookModel {
     id: string;
     name: string;
     autors: string[];
+    isPersonal: boolean;
 };
 
 export interface ContactModel {
@@ -25,4 +26,37 @@ export interface SubjectModel {
     startTime: string;
     endTime: string;
     date: string;
+}
+
+export interface GroupModel {
+    id: string;
+    name: string;
+    isSelected: boolean;
+}
+
+export interface UserModel {
+    id: string;
+    email: string;
+    password: string;
+    firstName: string;
+    middleName: string;
+    secondName: string;
+    telegram: string | null;
+    phoneNumber: string | null;
+
+    // personLibrary: BookModel[];
+    // selectedGrops: GroupModel[];
+}
+
+export interface AddDataModel {
+    library: BookModel[];
+    gropList: GroupModel[];
+    contacts: ContactModel[];
+    subjects: SubjectModel[];
+}
+
+
+export interface UserWithAddData {
+    user: UserModel;
+    addData: AddDataModel;
 }

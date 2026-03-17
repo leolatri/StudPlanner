@@ -4,19 +4,19 @@ import Registration from './pages/registration/Registration';
 import { useWindowDimensions, View } from "react-native";
 import SingInPage from './pages/registration/SingIn';
 import Welcome from "./pages/welcome/WelcomeBlock";
-import DataProvider from './providers/DataProvider';
 import Loader from './components/loader/Loader';
 import { Stack } from './navigation/types';
 import { generalStyles, colors } from './GeneralStyles';
 import Main from './pages/Main';
 import { LinearGradient } from 'expo-linear-gradient';
 import TimetableFilter from './pages/filter/timetable/TimetableFilter';
-import { groupList, groupsTest } from './testData';
 import GroupSearchPage from './pages/filter/timetable/GroupSearchPage';
 import LibraryFilter from './pages/filter/library/FilterLibrary';
 import AddMaterial from './pages/library/AddMaterial';
+import { StoreProvider } from './stores/StoreContext';
+import { observer } from 'mobx-react-lite';
 
-const App = () => {
+const App = observer(() => {
     const { width } = useWindowDimensions();
 
     const blockStyle = width >= 450 ? generalStyles.bigScreen : generalStyles.app__block;
@@ -35,9 +35,9 @@ const App = () => {
     }
 
     return (
-        <DataProvider>
+        <StoreProvider>
             <LinearGradient
-                colors={['rgba(25, 26, 31, 1)',  'rgba(30, 33, 43, 1)']}
+                colors={['rgba(25, 26, 31, 1)', 'rgba(30, 33, 43, 1)']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}
 
@@ -56,32 +56,33 @@ const App = () => {
                                     headerTintColor: colors.textWhite,
                                     title: "РЕГИСТРАЦИЯ",
                                     headerShadowVisible: false,
-                                    headerStyle: { backgroundColor: colors.backgraund},
+                                    headerStyle: { backgroundColor: colors.backgraund },
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
                             <Stack.Screen name='main' component={Main} />
                             <Stack.Screen
                                 name='filterTimetable'
-                                component={() => <TimetableFilter selectedGroups={groupsTest}/>}
+                                component={TimetableFilter}
                                 options={{
                                     headerShown: true,
                                     title: 'ФИЛЬТР',
                                     headerTintColor: colors.textWhite,
                                     headerShadowVisible: false,
-                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerStyle: { backgroundColor: colors.backgraund },
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
                             <Stack.Screen
                                 name='groupSearchPage'
-                                component={() => <GroupSearchPage groupList={groupList}/>}
+                                component={GroupSearchPage}
+                                // initialParams={{groupList: groupList}}
                                 options={{
                                     headerShown: true,
                                     title: 'ПОИСК ГРУПП',
                                     headerTintColor: colors.textWhite,
                                     headerShadowVisible: false,
-                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerStyle: { backgroundColor: colors.backgraund },
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
@@ -93,7 +94,7 @@ const App = () => {
                                     title: 'ФИЛЬТР',
                                     headerTintColor: colors.textWhite,
                                     headerShadowVisible: false,
-                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerStyle: { backgroundColor: colors.backgraund },
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
@@ -105,7 +106,7 @@ const App = () => {
                                     title: 'ДОБАВИТЬ МАТЕРИАЛ',
                                     headerTintColor: colors.textWhite,
                                     headerShadowVisible: false,
-                                    headerStyle: {backgroundColor: colors.backgraund},
+                                    headerStyle: { backgroundColor: colors.backgraund },
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
@@ -114,16 +115,16 @@ const App = () => {
                     </View>
                 </NavigationContainer>
             </LinearGradient>
-        </DataProvider>
+        </StoreProvider>
     );
-};
+});
 
 const st = {
     navTheme: {
         ...DefaultTheme,
         colors: {
             ...DefaultTheme.colors,
-           background: colors.backgraund,
+            background: colors.backgraund,
         },
     },
 

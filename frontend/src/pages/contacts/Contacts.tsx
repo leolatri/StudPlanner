@@ -1,9 +1,10 @@
 import { FlatList, StyleSheet, View } from "react-native";
 import SearchInput from "../../components/input/SearchInput";
-import { contacts } from "../../models/contacts/test";
 import ContactCard from "../../components/cards/ContactCard";
+import { useStore } from "../../stores/StoreContext";
 
 const Contacts = () => {
+    const {contactsStore} = useStore();
     return (
         <View style={st.contacts}>
             <SearchInput />
@@ -12,7 +13,7 @@ const Contacts = () => {
                 contentContainerStyle={st.contacts_list}
                 showsVerticalScrollIndicator={false}
                 // ListEmptyComponent={}
-                data={contacts}
+                data={contactsStore.contacts}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                     <ContactCard

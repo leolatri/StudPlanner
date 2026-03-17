@@ -1,16 +1,18 @@
 import { FlatList, StyleSheet, View } from "react-native";
-import { subjectsTest } from "../../models/subjects/test";
 import SubjectCard from "../../components/cards/SubjectCard";
 import Calendar from "../../components/timetable/Calendar";
+import { useStore } from "../../stores/StoreContext";
 
 const Timetable = () => {
+    const { timetableStore } = useStore();
+    // console.log('log1:', timetableStore);
     return (
         <View style={st.timetable}>
             <FlatList
                 style={{ flex: 1, alignSelf: 'stretch' }}
                 contentContainerStyle={st.timetable__list}
                 showsVerticalScrollIndicator={false}
-                data={subjectsTest}
+                data={timetableStore.subjects}
                 ListHeaderComponent={Calendar}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => (

@@ -8,8 +8,8 @@ export type RootStackParamList = {
     registration: undefined;
     filterLibrary: undefined;
     filterContacts: undefined;
-    filterTimetable: undefined;
-    groupSearchPage: undefined;
+    filterTimetable?: { selectedGroups: string[] };
+    groupSearchPage?: {groupList: string[]};
 
     Details: { id: number };
 };

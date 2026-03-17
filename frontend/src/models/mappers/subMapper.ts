@@ -7,7 +7,6 @@ const parseDate = (fullDate: number, duration?: number, timezone: string = 'UTC'
     const durationInSeconds = (duration || 90) * 60;
     
     const endDate = new Date((fullDate + durationInSeconds) * 1000);
-    console.log(endDate);
 
     const formatDate = date.toLocaleDateString('ru-RU');
     const startTime = date.toLocaleTimeString('ru-RU', { 
@@ -21,8 +20,8 @@ const parseDate = (fullDate: number, duration?: number, timezone: string = 'UTC'
         minute: '2-digit' 
     });
 
-    console.log('Start:', startTime);
-    console.log('End:', endTime);
+    // console.log('Start:', startTime);
+    // console.log('End:', endTime);
 
     return {
         formatDate,
@@ -31,13 +30,11 @@ const parseDate = (fullDate: number, duration?: number, timezone: string = 'UTC'
     };
 };
 
-export default function mapperSubject(rowData?: SubjectDTO[]): SubjectModel[] {
+export default function mapperSubjects(rowData?: SubjectDTO[]): SubjectModel[] {
     if (!rowData) return [];
 
     return rowData.sort((a, b) => a.timeAndDate - b.timeAndDate).map((el) => {
         const date = parseDate(el.timeAndDate, el.duration, 'Europe/Moscow');
-
-        console.log('date', date);
 
         return ({
             id: el.id,

@@ -22,7 +22,7 @@ function editFullName(fullName: string) {
     : `${last} ${firstI}.`;
 }
 
-export default function mapperBook(rowData?: BookDTO[]): BookModel[] {
+export default function mapperBooks(rowData?: BookDTO[]): BookModel[] {
     if (!rowData) return [];
 
     const books: BookModel[] = rowData.map((el) => (
@@ -30,6 +30,7 @@ export default function mapperBook(rowData?: BookDTO[]): BookModel[] {
             id: el.id,
             name: el.name,
             autors: el.autors.map((el) => editFullName(el)),
+            isPersonal: el.isPersonal,
         }
     ));
 

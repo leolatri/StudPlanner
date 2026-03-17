@@ -4,6 +4,7 @@ export interface BookDTO {
     id: string;
     name: string;
     autors: string[];
+    isPersonal: boolean;
 };
 
 export interface ContactDTO {
@@ -25,3 +26,27 @@ export interface SubjectDTO {
     professor: string;
     timeAndDate: number;
 };
+
+export interface GroupDTO {
+    id: string;
+    name: string;
+    isSelected: boolean;
+}
+
+export interface UserDTO {
+    id: string;
+    email: string;
+    password: string;
+    firstName: string;
+    middleName: string;
+    secondName: string;
+    telegram: string | null;
+    phoneNumber: string | null;
+}
+
+export interface AddintionDataDTO {
+    library: BookDTO[];
+    gropList: GroupDTO[];
+    contacts: ContactDTO[];
+    subjects: SubjectDTO[];
+}
