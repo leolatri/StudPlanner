@@ -30,6 +30,7 @@ export interface SubjectDTO {
 export interface GroupDTO {
     id: string;
     name: string;
+    isActive: boolean;
     isSelected: boolean;
 }
 

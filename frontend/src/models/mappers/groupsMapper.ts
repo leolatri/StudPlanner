@@ -1,17 +1,24 @@
 import { GroupDTO } from "../../api/types";
-import { GroupModel } from "../types";
+import { GroupModel, GroupsCollection } from "../types";
 
-export default function mapperGroups(rowData?: GroupDTO[]): GroupModel[] {
-    if (!rowData) return [];
+export default function mapperGroups(rowData?: GroupDTO[]): GroupsCollection {
+    if (!rowData) return {} as GroupsCollection;
 
-    const groups: GroupModel[] = rowData.map((el) => (
+    const allGroups: GroupModel[] = rowData.map((el) => (
         {
             id: el.id,
             name: el.name,
+            isActive: el.isActive,
             isSelected: el.isSelected,
         }
     ));
-    console.log('fetch data1', groups);
 
-    return groups;
+    const selectedGroups = allGroups.filter((el) => el.isSelected === true);
+    const notSelectedGroups = allGroups.filter((el) => el.isSelected !== true);
+
+    return {
+        allGroups,
+        selectedGroups,
+        notSelectedGroups,
+    }
 };

@@ -1,29 +1,38 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import SearchInput from "../../../components/input/SearchInput";
 import { colors, generalStyles } from "../../../GeneralStyles";
-import { memo } from "react";
 import { useStore } from "../../../stores/StoreContext";
 import { observer } from "mobx-react-lite";
 
-const GroupItem = ({ groupName }: { groupName: string }) => (
-    <TouchableOpacity style={st.groupItem}>
+interface Prop {
+    id: string;
+    groupName: string;
+    addGroup: (id: string) => void;
+}
+
+const GroupItem = ({ id, groupName, addGroup }: Prop) => (
+    <TouchableOpacity style={st.groupItem} onPress={() => addGroup(id)}>
         <Text style={generalStyles.text}>{groupName}</Text>
     </TouchableOpacity>
 )
 
 const GroupSearchPage = observer(() => {
     const { groupsStors }  = useStore();
-    console.log(groupsStors);
+    const groups = groupsStors.filteredGroups;
+
+    const addGroup = (id: string) => {
+        groupsStors.toggleGroupSelection(id);
+    }
 
     return (
         <View style={st.container}>
-            <SearchInput />
+            <SearchInput query={groupsStors.searchQuery} onChange={(val) => groupsStors.setSearchQuery(val)}/>
             <FlatList
-                data={groupsStors.groups}
+                data={groups}
                 style={{ flex: 1 }}
-                keyExtractor={(item) => item + "123"}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <GroupItem groupName={item.name} />
+                    <GroupItem groupName={item.name} id={item.id} addGroup={addGroup}/>
                 )}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={st.container__list}
@@ -54,4 +63,4 @@ const st = StyleSheet.create({
     }
 });
 
-export default memo(GroupSearchPage);
+export default GroupSearchPage;

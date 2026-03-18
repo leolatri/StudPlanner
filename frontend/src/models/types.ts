@@ -1,5 +1,13 @@
 import { ImageSourcePropType } from "react-native";
 
+export const FilterMap = {
+    0: 'Все',
+    1: 'Добавленные мной',
+    2: 'Библиотека университета'
+} as const;
+
+export type FilterValue = keyof typeof FilterMap;
+
 export interface BookModel {
     id: string;
     name: string;
@@ -31,6 +39,7 @@ export interface SubjectModel {
 export interface GroupModel {
     id: string;
     name: string;
+    isActive: boolean;
     isSelected: boolean;
 }
 
@@ -48,9 +57,21 @@ export interface UserModel {
     // selectedGrops: GroupModel[];
 }
 
+export interface BooksCollection {
+    personalBooks: BookModel[];
+    uniBooks: BookModel[];
+    allBooks: BookModel[];
+}
+
+export interface GroupsCollection {
+    notSelectedGroups: GroupModel[];
+    selectedGroups: GroupModel[];
+    allGroups: GroupModel[];
+}
+
 export interface AddDataModel {
-    library: BookModel[];
-    gropList: GroupModel[];
+    library: BooksCollection;
+    gropList: GroupsCollection;
     contacts: ContactModel[];
     subjects: SubjectModel[];
 }

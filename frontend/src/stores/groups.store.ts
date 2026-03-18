@@ -1,14 +1,14 @@
-import { makeAutoObservable } from "mobx";
-import { GroupModel, UserModel } from "../models/types";
+import { makeAutoObservable, runInAction } from "mobx";
+import { GroupModel, GroupsCollection } from "../models/types";
 import mapperGroups from "../models/mappers/groupsMapper";
 import { testGroups } from "../testData";
 import RootStore from "./root.store";
 
 class GroupsStore {
     loading: boolean = false;
-    groups: GroupModel[] | null = null;
-    selectedGroupIds: string[] = [];
+    groups: GroupsCollection | null = null;
     error: string | null = null;
+    searchQuery: string = "";
 
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
@@ -18,25 +18,83 @@ class GroupsStore {
     async loadGroups() {
         this.loading = true;
         try {
-            this.groups = mapperGroups(testGroups);
+            runInAction(() => {
+                this.groups = mapperGroups(testGroups);
+            })
+            console.log('groups: ', this.groups);
 
         } catch (error: any) {
+            runInAction(() => {
+                this.error = error;
+            })
             console.log('Error with fetching Grops', error);
         } finally {
-            this.loading = false;
+            runInAction(() => {
+                this.loading = false;
+            })
         }
     }
 
-    toggleGroup(groupId: string) {
-        const group = this.groups?.find((g) => g.id === groupId);
-        if (group) {
-            group.isSelected = !group.isSelected;
-            if (group.isSelected) {
-                this.selectedGroupIds.push(groupId);
-            } else {
-                this.selectedGroupIds = this.selectedGroupIds.filter((id) => id !== groupId);
+    setSearchQuery(val: string) {
+        this.searchQuery = val;
+        console.log(this.searchQuery);
+    }
+
+    get filteredGroups(): GroupModel[] {
+        if (!this.groups) return [];
+
+        const allGroups = this.groups.allGroups;
+        const query = this.searchQuery.trim().toLowerCase();
+
+        if (!query) return allGroups;
+
+        return allGroups.filter(el => el.name.toLowerCase().includes(query));
+    }
+
+    
+    toggleGroupSelection(id: string) {
+        if (!this.groups) return;
+
+        const group = this.groups.allGroups.find(g => g.id === id);
+        if (!group) return;
+
+        group.isSelected = !group.isSelected;
+
+        if (group.isSelected) {
+            if (!this.groups.selectedGroups.includes(group)) {
+                this.groups.selectedGroups.push(group);
             }
+            this.groups.notSelectedGroups = this.groups.notSelectedGroups.filter(g => g.id !== id);
+        } else {
+            if (!this.groups.notSelectedGroups.includes(group)) {
+                this.groups.notSelectedGroups.push(group);
+            }
+            this.groups.selectedGroups = this.groups.selectedGroups.filter(g => g.id !== id);
         }
+    }
+
+    setActiveGroup(id: string) {
+        if (!this.groups) return;
+
+        this.groups.selectedGroups.forEach((g) => g.isActive = false);
+
+        const group = this.groups.selectedGroups.find((g) => g.id === id);
+
+        if (group) {
+            group.isActive = true;
+        }
+    }
+
+    get selectedGroups(): GroupModel[] {
+        return this.groups?.selectedGroups ?? [];
+    }
+
+    get notSelectedGroups(): GroupModel[] {
+        return this.groups?.notSelectedGroups ?? [];
+    }
+
+    get allGroups(): GroupModel[] {
+        return this.groups?.allGroups ?? [];
     }
 };
 

@@ -1,13 +1,19 @@
-import { makeAutoObservable } from 'mobx';
-import { BookModel } from '../models/types';
+import { computed, makeAutoObservable, runInAction } from 'mobx';
+import { BookModel, BooksCollection, FilterValue } from '../models/types';
 import { testBooks } from '../testData';
 import mapperBooks from '../models/mappers/booksMapper';
 import RootStore from './root.store';
 
 class LibraryStore {
-    books: BookModel[] = [];
+    books: BooksCollection = {
+        allBooks: [],
+        personalBooks: [],
+        uniBooks: []
+    };
+    filter: FilterValue = 0;
     loading = false;
     error: string | null = null;
+    searchQuery: string = "";
 
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
@@ -19,21 +25,60 @@ class LibraryStore {
         try {
             // const response = await api.get<BookDTO[]>('/books');
             // this.books = mapperBook(response.data);
-            this.books = mapperBooks(testBooks);
+            runInAction(() => {
+                this.books = mapperBooks(testBooks);
+            })
         } catch (error: any) {
-            this.error = error;
+            runInAction(() => {
+                this.error = error;
+            })
             console.log('error whth fetch Contacts');
         } finally {
-            this.loading = false;
+            runInAction(() => {
+                this.loading = false;
+            })
         }
     }
 
+    setSearchQuery(val: string) {
+        this.searchQuery = val;
+    }
+
+    get filteredBooks(): BookModel[] {
+        const { allBooks } = this.books;
+        const { searchQuery, filter } = this;
+
+        let filteredBooks = allBooks;
+
+        if (filter === 1) {
+            filteredBooks = allBooks.filter((el) => el.isPersonal === true);
+        } else if (filter === 2) {
+            filteredBooks = allBooks.filter((el) => el.isPersonal !== true);
+        }
+
+        if (searchQuery.trim()) {
+            filteredBooks = filteredBooks.filter((el) =>
+                el.name.toLowerCase().trim().includes(searchQuery) ||
+                el.autors.some((a) => a.toLowerCase().trim().includes(searchQuery))
+            )
+        }
+
+        return filteredBooks;
+    }
+
     addBook(book: BookModel) {
-        this.books.push(book);
+        this.books.personalBooks.push(book);
+        this.books.allBooks.push(book);
     }
 
     removeBook(id: string) {
-        this.books = this.books.filter((b) => b.id !== id);
+        this.books.allBooks = this.books.allBooks.filter((b) => b.id !== id);
+        this.books.personalBooks = this.books.personalBooks.filter(b => b.id !== id);
+        this.books.uniBooks = this.books.uniBooks.filter(b => b.id !== id);
+    }
+
+    setFilter(param: FilterValue) {
+        this.filter = param;
     }
 }
 

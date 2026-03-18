@@ -41,39 +41,29 @@ const GroupItem = ({ id, name, setActive, isActive, onRemove }: GroupProps) => {
 };
 
 const TimetableFilter = observer(() => {
-    const [activeGroupIndex, setActive] = useState<string | null>(null);
-    const { userStore } = useStore();
-    let userGroups = userStore.user?.addData.gropList;
+    const { groupsStors } = useStore();
 
-    console.log('log2:', userGroups);
     const navigation = useNavigation<Nav>();
 
-
-
     const removeGroup = useCallback((id: string) => {
-        if (userGroups && userStore.user) {
-            const newGroups = userGroups.filter((el) => el.id !== id);
-            userGroups = newGroups;
-            userStore.user.addData.gropList = newGroups;
+        if (groupsStors) groupsStors.toggleGroupSelection(id);
+    }, [groupsStors]);
 
-            if (activeGroupIndex !== null) {
-                if (activeGroupIndex === id) {
-                    setActive(null);
-                }
-            }
-        }
-    }, [activeGroupIndex, userStore.user]);
+    const handleActivity = (id: string) => {
+        groupsStors.setActiveGroup(id);
+        console.log(groupsStors.selectedGroups);
+    }
 
     return (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={st.filter}>
             <Text style={[generalStyles.text, { fontSize: 12, alignSelf: 'flex-start' }]}>ГРУППЫ</Text>
-            {userGroups?.map((el) => (
+            {groupsStors.selectedGroups.map((el) => (
                 <GroupItem
                     id={el.id}
                     key={el.id}
                     name={el.name}
-                    isActive={activeGroupIndex === el.id}
-                    setActive={setActive}
+                    isActive={el.isActive}
+                    setActive={handleActivity}
                     onRemove={removeGroup}
                 />
             ))}

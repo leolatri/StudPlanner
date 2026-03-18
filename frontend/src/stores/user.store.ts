@@ -13,6 +13,7 @@ class UserStore {
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
         this.rootStore = rootStore;
+        this.fetchUser();
     }
 
     async fetchUser() {
@@ -26,6 +27,7 @@ class UserStore {
 
             runInAction(() => {
                 this.user = fullUser;
+                console.log('user: ', fullUser);
             });
         } catch (error: any) {
             runInAction(() => this.error = error.message);

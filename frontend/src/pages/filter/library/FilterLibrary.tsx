@@ -1,16 +1,18 @@
-import { useState } from "react";
 import { colors, generalStyles } from "../../../GeneralStyles";
 import { ScrollView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { FilterMap, FilterValue } from "../../../models/types";
+import { useStore } from "../../../stores/StoreContext";
+import { useState } from "react";
 
 
-interface GroupProps {
-    id: number;
+interface Props {
+    id: FilterValue;
     label: string;
     isActive: boolean;
-    setActive: (val: number) => void;
+    setActive: (val: FilterValue) => void;
 }
 
-const Item = ({ id, label, setActive, isActive }: GroupProps) => {
+const Item = ({ id, label, setActive, isActive }: Props) => {
     return (
         <TouchableOpacity
             onPress={() => setActive(id)}
@@ -22,19 +24,30 @@ const Item = ({ id, label, setActive, isActive }: GroupProps) => {
 };
 
 const LibraryFilter = () => {
-    const [activeGroupIndex, setActive] = useState<number | null>(null);
-    const filterItems = ['Все', 'Добавленные мной', 'Библиотека университета'];
+    const { libraryStore } = useStore();
+    const [activeFilter, setActiveFilter] = useState<FilterValue>(libraryStore.filter);
+
+    const filterItems = Object.entries(FilterMap).map(([value, label]) => ({
+        value: Number(value) as FilterValue,
+        label,
+    }));
+
+    const handleFilter = (value: FilterValue) => {
+        console.log(libraryStore.filter);
+        setActiveFilter(value);
+        libraryStore.setFilter(value);
+    };
 
     return (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={st.filter}>
             <Text style={[generalStyles.text, { fontSize: 12, alignSelf: 'flex-start' }]}>МАТЕРИАЛЫ</Text>
             {filterItems.map((el, index) => (
                 <Item
-                    id={index}
+                    id={el.value}
                     key={index}
-                    label={el}
-                    isActive={activeGroupIndex === index}
-                    setActive={setActive}
+                    label={el.label}
+                    isActive={el.value === activeFilter}
+                    setActive={handleFilter}
                 />
             ))}
 

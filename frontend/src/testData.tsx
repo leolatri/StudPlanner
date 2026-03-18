@@ -84,17 +84,32 @@ export const testGroups: GroupDTO[] = [
   {
     id: '1',
     name: 'ИВТ-201',
+    isActive: false,
     isSelected: false,
   },
   {
     id: '2',
     name: 'ИВТ-202',
+    isActive: false,
     isSelected: true,
   },
   {
     id: '3',
-    name: 'ПМИ-101',
+    name: 'МО-ИТ-101',
+    isActive: false,
     isSelected: false,
+  },
+  {
+    id: '4',
+    name: 'ПИП-ИТ-101',
+    isActive: false,
+    isSelected: true,
+  },
+  {
+    id: '5',
+    name: 'РЕЖ-001',
+    isActive: false,
+    isSelected: true,
   },
 ];
 

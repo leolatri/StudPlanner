@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import { ContactModel } from '../models/types';
 import { testContacts } from '../testData';
 import mapperContacts from '../models/mappers/contactsMapper';
@@ -18,12 +18,18 @@ class ContactsStore {
         this.loading = true;
         try {
             //get ...
-            this.contacts = mapperContacts(testContacts);
+            runInAction(() => {
+                this.contacts = mapperContacts(testContacts);
+            })
         } catch (error: any) {
-            this.error = error;
+            runInAction(() => {
+                this.error = error;
+            })
             console.log('error whth fetch Contacts');
         } finally {
-            this.loading = false;
+            runInAction(() => {
+                this.loading = false;
+            })
         }
     }
 }

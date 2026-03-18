@@ -15,13 +15,13 @@ const Library = () => {
 
     return (
         <View style={st.library}>
-            <SearchInput />
+            <SearchInput query={libraryStore.searchQuery} onChange={libraryStore.setSearchQuery}/>
             <FlatList
                 style={{ flex: 1, alignSelf: 'stretch' }}
                 contentContainerStyle={st.library__list}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={(item) => item.id}
-                data={libraryStore.books}
+                data={libraryStore.filteredBooks}
                 // ListEmptyComponent={}
                 ListHeaderComponent={
                     <Button
