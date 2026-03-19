@@ -3,7 +3,6 @@ import { SubjectModel } from "../../models/types";
 import Person from '../../../assets/profile.svg';
 import { colors } from "../../GeneralStyles";
 import Door from '../../../assets/door.svg';
-import { memo } from 'react';
 
 const Info = ({ icon, text }: { icon: string, text: string }) => (
     <View style={st.info}>
@@ -81,4 +80,4 @@ const st = StyleSheet.create({
     }
 });
 
-export default memo(SubjectCard);
+export default SubjectCard;

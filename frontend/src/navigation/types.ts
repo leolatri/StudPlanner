@@ -5,11 +5,13 @@ export type RootStackParamList = {
     singIn: undefined;
     welcome: undefined;
     addMaterial: undefined;
+    contactsPage: undefined;
     registration: undefined;
     filterLibrary: undefined;
     filterContacts: undefined;
     filterTimetable?: { selectedGroups: string[] };
     groupSearchPage?: {groupList: string[]};
+    contactFeedback?: {contactId: string}
 
     Details: { id: number };
 };

@@ -1,26 +1,41 @@
-import { Image, StyleSheet, TextInput, View } from "react-native";
-import loupe from '../../imgs/loupe/loupe.png';
-import loupeActive from '../../imgs/loupe/loupe-active.png';
-import React, { useState } from "react";
-import { colors } from "../../GeneralStyles";
+import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import Loupe from '../../../assets/loupe.svg';
+import Cross from '../../../assets/cross.svg';
+import { colors } from "../../GeneralStyles";
+import { useState } from "react";
 
-const SearchInput = () => {
+interface SearchInputProps {
+    query: string;
+    onChange: (val: string) => void;
+}
+
+const SearchInput = ({ query, onChange }: SearchInputProps) => {
     const [active, setActive] = useState(false);
+    
+    const deleteContent = () => {
+        onChange('');
+        setActive(false);
+    }
+
     return (
         <View
-            style={[st.search, active && {borderColor: colors.textWhite}]}
+            style={[st.search, active && { borderColor: colors.textWhite }]}
             onFocus={() => setActive(true)}
             onBlur={() => setActive(false)}
-        >   
-            <Loupe width={17} height={17} rotate={180} fill={active ? colors.textWhite : colors.gray}/>
+        >
+            <Loupe width={17} height={17} rotate={180} fill={active ? colors.textWhite : colors.gray} />
 
             <TextInput
+                value={query}
+                placeholder="Поиск"
+                onChangeText={onChange}
                 style={st.search__input}
                 onBlur={() => setActive(false)}
-                placeholder="Поиск"
                 placeholderTextColor={'rgba(148, 148, 148, 0.43)'}
             />
+            <TouchableOpacity style={st.search__cross} onPress={deleteContent}>
+                <Cross width={17} height={17} />
+            </TouchableOpacity>
         </View>
     )
 };
@@ -43,7 +58,7 @@ const st = StyleSheet.create({
     },
     search__input: {
         height: '100%',
-        width: '90%',
+        width: '80%',
 
         borderWidth: 0,
         padding: 0,
@@ -54,12 +69,13 @@ const st = StyleSheet.create({
         fontSize: 13,
         outlineColor: "transparent",
     },
-    search__img: {
-        width: 17,
-        height: 17,
+    search__cross: {
+        width: 20,
+        height: '100%',
 
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems:'center',
     }
 });
 
-export default React.memo(SearchInput);
+export default SearchInput;

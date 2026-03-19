@@ -6,42 +6,51 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { useStore } from "../../stores/StoreContext";
+import { observer } from "mobx-react-lite";
+import EmptyPage from "../empty/EmptyPage";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterLibrary">;
 
-const Library = () => {
+const Library = observer(() => {
     const navigation = useNavigation<Nav>();
-    const {libraryStore} = useStore();
+    const { libraryStore } = useStore();
 
     return (
         <View style={st.library}>
-            <SearchInput query={libraryStore.searchQuery} onChange={libraryStore.setSearchQuery}/>
-            <FlatList
-                style={{ flex: 1, alignSelf: 'stretch' }}
-                contentContainerStyle={st.library__list}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={(item) => item.id}
-                data={libraryStore.filteredBooks}
-                // ListEmptyComponent={}
-                ListHeaderComponent={
-                    <Button
-                        label="Добавить материал"
-                        func={() => navigation.navigate('addMaterial')}
-                        style={st.library__button}
-                    />
-                }
-                renderItem={({ item }) => (
-                    <BookCard
-                        id={item.id}
-                        name={item.name}
-                        autors={item.autors}
-                        isPersonal={item.isPersonal}
-                    />
-                )}
-            />
+            <SearchInput query={libraryStore.searchQuery} onChange={(val) => libraryStore.setSearchQuery(val)} />
+            {libraryStore.filteredBooks.length === 0 ?
+                <EmptyPage
+                    type="loupe"
+                    text="Ничего не найдено. Введите название книги или автора"
+                /> :
+                <FlatList
+                    style={{ flex: 1, alignSelf: 'stretch' }}
+                    contentContainerStyle={st.library__list}
+                    showsVerticalScrollIndicator={false}
+                    keyExtractor={(item) => item.id}
+                    data={libraryStore.filteredBooks}
+                    // ListEmptyComponent={}
+                    ListHeaderComponent={
+                        <Button
+                            label="Добавить материал"
+                            func={() => navigation.navigate('addMaterial')}
+                            style={st.library__button}
+                        />
+                    }
+                    renderItem={({ item }) => (
+                        <BookCard
+                            id={item.id}
+                            name={item.name}
+                            autors={item.autors}
+                            isPersonal={item.isPersonal}
+                        />
+                    )}
+                />
+            }
+
         </View >
     )
-};
+})
 
 const st = StyleSheet.create({
     library: {

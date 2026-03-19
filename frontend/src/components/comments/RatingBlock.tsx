@@ -5,7 +5,7 @@ import four from '../../../assets/rating/four.png';
 import five from '../../../assets/rating/five.png';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { colors, generalStyles } from '../../GeneralStyles';
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import Input from '../input/Input';
 import Button from '../button/Button';
 
@@ -14,44 +14,40 @@ type Rating = 1 | 2 | 3 | 4 | 5;
 
 interface Props {
     feedbackIsLeaved: boolean;
-    setFeedbackStatus: (val: boolean) => void;
 }
 
 interface FeedbakProps {
     feedbackIsLeaved: boolean;
-    setFeedbackStatus: (val: boolean) => void;
-    allCounts: number[]
+    middleGrade: number,
+    feedbackCount: number,
+}
+
+interface RatingProps {
+    middleGrade: number,
+    feedbackCount: number,
 }
 
 const countImgs = [one, two, three, four, five];
 
-const OverallRating = ({allCounts}: {allCounts: number[]}) => {
-    const sum = () => {
-        let tmp = 0;
-        allCounts.forEach((el) => tmp += el);
-        return tmp;
-    };
-
-    const finalAssessment = Math.floor((sum() / (allCounts.length - 1)) * 10) / 10;
-    const picture = finalAssessment > 0 ? countImgs[Math.floor(finalAssessment) - 1 as Rating] : undefined;
+const OverallRating = ({middleGrade, feedbackCount}: RatingProps) => {
+    const picture = middleGrade > 0 ? countImgs[Math.floor(middleGrade) - 1 as Rating] : undefined;
 
     return (
         <View style={st.container}>
-            <Text style={generalStyles.text}>{finalAssessment}</Text>
+            <Text style={generalStyles.text}>{middleGrade}</Text>
             <View style={st.container__block}>
                 <Image source={picture}/>
-                <Text  style={[generalStyles.text, {fontSize: 8}]}>{`Всего ${allCounts.length} отзывов`}</Text>
+                <Text  style={[generalStyles.text, {fontSize: 8}]}>{`Всего ${feedbackCount} отзывов`}</Text>
             </View>
         </View>
     )
 };
 
 
-const FeedbackField = ({feedbackIsLeaved, setFeedbackStatus}: Props) => {
+const FeedbackField = ({feedbackIsLeaved}: Props) => {
     const [activeImg, setActive] = useState<number | null>(null);
     const saveComment = () => {
         console.log('save comment');
-        setFeedbackStatus(true);
     }
 
     return (
@@ -73,11 +69,11 @@ const FeedbackField = ({feedbackIsLeaved, setFeedbackStatus}: Props) => {
     )
 };
 
-const FeedbackBlock = ({allCounts, feedbackIsLeaved, setFeedbackStatus} :FeedbakProps) => {
+const FeedbackBlock = ({feedbackCount, middleGrade, feedbackIsLeaved} :FeedbakProps) => {
     return (
         <View>
-            <OverallRating allCounts={allCounts}/>
-            <FeedbackField feedbackIsLeaved={feedbackIsLeaved} setFeedbackStatus={setFeedbackStatus}/>
+            <OverallRating middleGrade={middleGrade} feedbackCount={feedbackCount}/>
+            <FeedbackField feedbackIsLeaved={feedbackIsLeaved}/>
         </View>
     )
 }
@@ -116,4 +112,4 @@ const st = StyleSheet.create({
     }
 });
 
-export default memo(FeedbackBlock);
+export default FeedbackBlock;

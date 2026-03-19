@@ -10,6 +10,7 @@ export const colors = {
     formBack: 'rgba(31, 34, 43, 1)',
     tabBack: 'rgba(31, 34, 43, 1)',
     borderForm: 'rgba(101, 101, 101, 1)',
+    darkBlue: 'rgba(62, 100, 149, 1)',
 }
 
 export const generalStyles = StyleSheet.create({

@@ -1,5 +1,6 @@
 import { ContactDTO } from "../../api/types";
 import { ContactModel } from "../types";
+import mapperReview from "./feedbackMapper";
 
 export default function mapperContacts(rowData?: ContactDTO[]): ContactModel[] {
     if(!rowData) return [];
@@ -10,5 +11,6 @@ export default function mapperContacts(rowData?: ContactDTO[]): ContactModel[] {
         img: el.img,
         email: el.email,
         uniSubjects: el.uniSubjects,
+        feedbacks: mapperReview(el.feedbacks),
     }))
 } 

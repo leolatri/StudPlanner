@@ -3,6 +3,7 @@ import SearchInput from "../../../components/input/SearchInput";
 import { colors, generalStyles } from "../../../GeneralStyles";
 import { useStore } from "../../../stores/StoreContext";
 import { observer } from "mobx-react-lite";
+import EmptyPage from "../../empty/EmptyPage";
 
 interface Prop {
     id: string;
@@ -17,26 +18,34 @@ const GroupItem = ({ id, groupName, addGroup }: Prop) => (
 )
 
 const GroupSearchPage = observer(() => {
-    const { groupsStors }  = useStore();
+    const { groupsStors } = useStore();
     const groups = groupsStors.filteredGroups;
 
     const addGroup = (id: string) => {
         groupsStors.toggleGroupSelection(id);
+        console.log(groups);
     }
 
     return (
         <View style={st.container}>
-            <SearchInput query={groupsStors.searchQuery} onChange={(val) => groupsStors.setSearchQuery(val)}/>
-            <FlatList
-                data={groups}
-                style={{ flex: 1 }}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                    <GroupItem groupName={item.name} id={item.id} addGroup={addGroup}/>
-                )}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={st.container__list}
-            />
+            <SearchInput query={groupsStors.searchQuery} onChange={(val) => groupsStors.setSearchQuery(val)} />
+            {groupsStors.filteredGroups.length === 0 ?
+                <EmptyPage
+                    type="loupe"
+                    text="Ничего не найдено. Введите название группы"
+                /> :
+                <FlatList
+                    data={groups}
+                    style={{ flex: 1 }}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <GroupItem groupName={item.name} id={item.id} addGroup={addGroup} />
+                    )}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={st.container__list}
+                />
+            }
+
         </View>
     )
 });

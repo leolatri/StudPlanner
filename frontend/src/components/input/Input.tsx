@@ -1,5 +1,5 @@
 import { View, Text, TextInput, StyleSheet} from "react-native";
-import React, { useState } from "react";
+import { useState } from "react";
 import { colors } from "../../GeneralStyles";
 
 interface InputProps {
@@ -65,4 +65,4 @@ const st = StyleSheet.create({
     },
 });
 
-export default React.memo(Input);
+export default Input;

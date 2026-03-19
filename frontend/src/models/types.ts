@@ -15,12 +15,21 @@ export interface BookModel {
     isPersonal: boolean;
 };
 
+export interface FeedbackModel {
+    id: string;
+    text: string;
+    grade: number;
+    autor: string;
+    isPersonal: boolean;
+}
+
 export interface ContactModel {
     id: string;
     fio: string;
     email: string;
     uniSubjects: string[];
     img: ImageSourcePropType;
+    feedbacks: FeedbackModel[];
 
 };
 

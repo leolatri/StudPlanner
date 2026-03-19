@@ -15,6 +15,7 @@ import LibraryFilter from './pages/filter/library/FilterLibrary';
 import AddMaterial from './pages/library/AddMaterial';
 import { StoreProvider } from './stores/StoreContext';
 import { observer } from 'mobx-react-lite';
+import Feedbacks from './pages/contacts/Feedbacks';
 
 const App = observer(() => {
     const { width } = useWindowDimensions();
@@ -110,6 +111,19 @@ const App = observer(() => {
                                     headerTitleStyle: generalStyles.title,
                                 }}
                             />
+                            <Stack.Screen
+                                name='contactFeedback'
+                                component={Feedbacks}
+                                options={{
+                                    headerShown: true,
+                                    title: 'ОТЗЫВЫ',
+                                    headerTintColor: colors.textWhite,
+                                    headerShadowVisible: false,
+                                    headerStyle: { backgroundColor: colors.backgraund },
+                                    headerTitleStyle: generalStyles.title,
+                                }}
+                            />
+
                         </Stack.Navigator>
 
                     </View>

@@ -42,6 +42,8 @@ class LibraryStore {
 
     setSearchQuery(val: string) {
         this.searchQuery = val;
+        console.log(this.searchQuery);
+        console.log(val);
     }
 
     get filteredBooks(): BookModel[] {
@@ -51,16 +53,17 @@ class LibraryStore {
         let filteredBooks = allBooks;
 
         if (filter === 1) {
-            filteredBooks = allBooks.filter((el) => el.isPersonal === true);
+            filteredBooks = filteredBooks.filter((el) => el.isPersonal === true);
         } else if (filter === 2) {
-            filteredBooks = allBooks.filter((el) => el.isPersonal !== true);
+            filteredBooks = filteredBooks.filter((el) => el.isPersonal !== true);
         }
 
-        if (searchQuery.trim()) {
+        const query = searchQuery.trim().toLowerCase();
+        if (query) {
             filteredBooks = filteredBooks.filter((el) =>
-                el.name.toLowerCase().trim().includes(searchQuery) ||
-                el.autors.some((a) => a.toLowerCase().trim().includes(searchQuery))
-            )
+                el.name.toLowerCase().trim().includes(query) ||
+                el.autors.some((a) => a.toLowerCase().trim().includes(query))
+            );
         }
 
         return filteredBooks;

@@ -21,8 +21,6 @@ class GroupsStore {
             runInAction(() => {
                 this.groups = mapperGroups(testGroups);
             })
-            console.log('groups: ', this.groups);
-
         } catch (error: any) {
             runInAction(() => {
                 this.error = error;
@@ -37,25 +35,24 @@ class GroupsStore {
 
     setSearchQuery(val: string) {
         this.searchQuery = val;
-        console.log(this.searchQuery);
     }
 
     get filteredGroups(): GroupModel[] {
         if (!this.groups) return [];
 
-        const allGroups = this.groups.allGroups;
+        const notSelectedGroups = this.groups.notSelectedGroups;
         const query = this.searchQuery.trim().toLowerCase();
 
-        if (!query) return allGroups;
+        if (!query) return notSelectedGroups;
 
-        return allGroups.filter(el => el.name.toLowerCase().includes(query));
+        return notSelectedGroups.filter((el) => el.name.toLowerCase().includes(query));
     }
 
     
     toggleGroupSelection(id: string) {
         if (!this.groups) return;
 
-        const group = this.groups.allGroups.find(g => g.id === id);
+        const group = this.groups.allGroups.find((g) => g.id === id);
         if (!group) return;
 
         group.isSelected = !group.isSelected;
@@ -64,13 +61,20 @@ class GroupsStore {
             if (!this.groups.selectedGroups.includes(group)) {
                 this.groups.selectedGroups.push(group);
             }
-            this.groups.notSelectedGroups = this.groups.notSelectedGroups.filter(g => g.id !== id);
+            this.groups.notSelectedGroups = this.groups.notSelectedGroups.filter((g) => g.id !== id);
+            console.log('selected: ', this.groups.selectedGroups);
+            console.log('NOT selected: ', this.groups.notSelectedGroups);
         } else {
             if (!this.groups.notSelectedGroups.includes(group)) {
                 this.groups.notSelectedGroups.push(group);
             }
-            this.groups.selectedGroups = this.groups.selectedGroups.filter(g => g.id !== id);
+            console.log('selected: ', this.groups.selectedGroups);
+            console.log('NOT selected: ', this.groups.notSelectedGroups);
+
+
+            this.groups.selectedGroups = this.groups.selectedGroups.filter((g) => g.id !== id);
         }
+
     }
 
     setActiveGroup(id: string) {

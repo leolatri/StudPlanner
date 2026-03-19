@@ -6,7 +6,6 @@ import Contacts from "./contacts/Contacts";
 import { StyleSheet, View } from "react-native";
 import Library from "./library/Library";
 import Profile from "./profile/Profile";
-import React from "react";
 import Button from "../components/button/Button";
 import filter from '../../assets/filter.png';
 import { useNavigation } from "@react-navigation/native";
@@ -150,4 +149,4 @@ const st = StyleSheet.create({
     }
 })
 
-export default React.memo(Main);
+export default Main;

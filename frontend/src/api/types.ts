@@ -7,6 +7,14 @@ export interface BookDTO {
     isPersonal: boolean;
 };
 
+export interface FeedbackDTO {
+    id: string;
+    text: string;
+    grade: number;
+    autor: string;
+    isPersonal: boolean;
+}
+
 export interface ContactDTO {
     id: string;
     // img: string; нужно потом для исп из бд
@@ -14,6 +22,7 @@ export interface ContactDTO {
     fio: string;
     email: string;
     uniSubjects: string[];
+    feedbacks: FeedbackDTO[];
 };
 
 export interface SubjectDTO {

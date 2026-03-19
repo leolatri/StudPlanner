@@ -1,11 +1,15 @@
-import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { ContactModel } from "../../models/types";
 import ChatIcon from '../../../assets/chat.svg';
 import { colors, generalStyles } from "../../GeneralStyles";
 import EmailImg from '../../../assets/email.svg';
 import React from "react";
 import Arrow from "../Arrow";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../navigation/types";
+import { useNavigation } from "@react-navigation/native";
 
+type Nav = NativeStackNavigationProp<RootStackParamList, 'contactsPage'>
 
 const Subjects = ({ arr }: { arr: string[] }) => {
     const count = arr.length - 2;
@@ -31,9 +35,10 @@ const Email = ({ email }: { email: string }) => {
     );
 };
 
-const BottomChat = () => {
+const BottomChat = ({functionPress}: {functionPress: () => void}) => {
     const handlePress = () => {
         console.log("Нажали на BottomChat");
+        functionPress();
     };
 
     return (
@@ -49,6 +54,9 @@ const BottomChat = () => {
 
 
 const ContactCard = ({ id, img, fio, email, uniSubjects }: ContactModel) => {
+    const navigation = useNavigation<Nav>();
+    const navigateToFeedback = () => navigation.navigate('contactFeedback', { contactId: id });
+    
     return (
         <View style={st.contactCard}>
             <View style={st.contactCard__container}>
@@ -59,7 +67,7 @@ const ContactCard = ({ id, img, fio, email, uniSubjects }: ContactModel) => {
                 </View>
                 <Email email={email} />
             </View>
-            <BottomChat />
+            <BottomChat functionPress={navigateToFeedback}/>
         </View>
     )
 };
@@ -110,7 +118,7 @@ const st = StyleSheet.create({
         paddingVertical: 4,
 
         borderRadius: 10,
-        backgroundColor: colors.generalBlue,
+        backgroundColor: colors.darkBlue,
 
         fontFamily: "Montserrat-Regular",
         fontSize: 10,
@@ -157,5 +165,5 @@ const st = StyleSheet.create({
 
 });
 
-export default React.memo(ContactCard);
+export default ContactCard;
 
