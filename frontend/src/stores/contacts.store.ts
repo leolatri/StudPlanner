@@ -5,6 +5,7 @@ import mapperContacts from '../models/mappers/contactsMapper';
 
 class ContactsStore {
     contacts: ContactModel[] = [];
+    feedbackIsLeaved: boolean = false;
 
     error: string | null = null;
     searchQuery: string = "";
@@ -35,9 +36,24 @@ class ContactsStore {
         }
     }
 
+    getContact(contactId: string) {
+        console.log(this.contacts.find((el) => el.id === contactId));
+        return this.contacts.find((el) => el.id === contactId) || null;
+    }
+
     setSearchQuery(val: string) {
         this.searchQuery = val;
     }
+
+    setFeedbackStatus(contactId: string) {
+        const contact = this.contacts.find((el) => el.id === contactId);
+        if(contact) contact.feedbackIsLeaved = ! contact?.feedbackIsLeaved;
+
+    }
+
+    // getFeedbackStatus(contactId: string) {
+    //     return this.contacts.find((el) => el.id === contactId)?.feedbackIsLeaved;
+    // }
 
     get filteredContacts(): ContactModel[] {
         if (!this.contacts) return [];
@@ -50,22 +66,24 @@ class ContactsStore {
         return allContacts.filter((el) => el.fio.toLowerCase().includes(query));
     }
 
-    getFeedbacks(contactId: string): FeedbackModel[] {
-        if(!this.contacts) return [];
+    // getFeedbacks(contactId: string): FeedbackModel[] {
+    //     if(!this.contacts) return [];
 
-        const contact = this.contacts.find((el) => el.id === contactId);
+    //     const contact = this.contacts.find((el) => el.id === contactId);
 
-        return contact?.feedbacks || [];
-    }
+    //     return contact?.feedbacks || [];
+    // }
 
-    getFeedbackCount(contactId: string): number {
-        return this.getFeedbacks(contactId).length
-    }
+    // getFeedbackCount(contactId: string): number {
+    //     return this.getFeedbacks(contactId).length
+    // }
 
     getContactGrade(contactId: string): number {
         if(!this.contacts) return 0;
 
-        const feedbacks = this.getFeedbacks(contactId);
+        const feedbacks = this.getContact(contactId)?.feedbacks;
+
+        if(!feedbacks) return 0;
         let sum = 0;
 
         feedbacks.forEach((el) => sum += el.grade);
@@ -75,10 +93,6 @@ class ContactsStore {
         return res;
     }
 
-    // setLeaveFeedbackStatus(contactId: string) {
-    //     const contact = this.contacts.find((el) => el.id === contactId);
-    //     contact.
-    // }
 }
 
 export default ContactsStore;

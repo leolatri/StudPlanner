@@ -23,6 +23,7 @@ export interface ContactDTO {
     email: string;
     uniSubjects: string[];
     feedbacks: FeedbackDTO[];
+    feedbackIsLeaved: boolean;
 };
 
 export interface SubjectDTO {

@@ -30,6 +30,7 @@ export interface ContactModel {
     uniSubjects: string[];
     img: ImageSourcePropType;
     feedbacks: FeedbackModel[];
+    feedbackIsLeaved: boolean;
 
 };
 

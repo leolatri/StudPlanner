@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useStore } from "../../stores/StoreContext";
 import { observer } from "mobx-react-lite";
 import EmptyPage from "../empty/EmptyPage";
+import { colors } from "../../GeneralStyles";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterLibrary">;
 
@@ -26,8 +27,10 @@ const Library = observer(() => {
                 <FlatList
                     style={{ flex: 1, alignSelf: 'stretch' }}
                     contentContainerStyle={st.library__list}
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
+                    indicatorStyle='white'
                     keyExtractor={(item) => item.id}
+                    persistentScrollbar={true}
                     data={libraryStore.filteredBooks}
                     // ListEmptyComponent={}
                     ListHeaderComponent={
@@ -55,7 +58,6 @@ const Library = observer(() => {
 const st = StyleSheet.create({
     library: {
         flex: 1,
-        padding: 20,
 
         alignItems: 'center',
         gap: 20,
@@ -68,6 +70,7 @@ const st = StyleSheet.create({
     },
     library__list: {
         paddingBottom: 70,
+        paddingHorizontal: 20,
 
         flexGrow: 1,
         flexDirection: 'column',

@@ -60,11 +60,11 @@ const st = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 20,
         gap: 20,
     },
     container__list: {
         paddingBottom: 70,
+        paddingHorizontal: 20,
 
         flexGrow: 1,
         flexDirection: 'column',

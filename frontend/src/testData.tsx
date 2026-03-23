@@ -65,14 +65,28 @@ const testReviews1: FeedbackDTO[] = [
   {
     id: "9",
     text: "Помог разобраться в сложной теме, спасибо автору",
-    grade: 5,
+    grade: 1,
     autor: "Григорьева Татьяна",
     isPersonal: false,
   },
   {
     id: "10",
     text: "Некоторые главы устарели, нуждается в обновлении",
-    grade: 2,
+    grade: 1,
+    autor: "Андреев Сергей",
+    isPersonal: false,
+  },
+  {
+    id: "101",
+    text: "ЧТОЖ",
+    grade: 1,
+    autor: "Андреев Сергей",
+    isPersonal: false,
+  },
+  {
+    id: "1012",
+    text: "LF Z",
+    grade: 1,
     autor: "Андреев Сергей",
     isPersonal: false,
   },
@@ -322,6 +336,7 @@ export const testContacts: ContactDTO[] = [
     email: "ivanov.is@example.com",
     uniSubjects: ["Математическое моделирование", "Информатика в жизни"],
     feedbacks: testReviews1,
+    feedbackIsLeaved: false
   },
   {
     id: "p2",
@@ -330,6 +345,8 @@ export const testContacts: ContactDTO[] = [
     email: "petrova.ad@example.com",
     uniSubjects: ["Английский язык", "Теория большого заговора", "История"],
     feedbacks: testReviews2,
+    feedbackIsLeaved: false
+
   },
   {
     id: "p3",
@@ -338,6 +355,8 @@ export const testContacts: ContactDTO[] = [
     email: "smirnov.ap@example.com",
     uniSubjects: ["Экономика в социальной сети", "Статистика большого мира", "Право"],
     feedbacks: testReviews3,
+    feedbackIsLeaved: false
+
   },
   {
     id: "p4",
@@ -346,6 +365,8 @@ export const testContacts: ContactDTO[] = [
     email: "kuznetsova.mo@example.com",
     uniSubjects: ["Биология и всё о живых существах", "Химия в простанородье", "Экология"],
     feedbacks: testReviews4,
+    feedbackIsLeaved: false
+
   },
 ];
 

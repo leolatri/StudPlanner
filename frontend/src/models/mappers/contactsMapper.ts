@@ -12,5 +12,6 @@ export default function mapperContacts(rowData?: ContactDTO[]): ContactModel[] {
         email: el.email,
         uniSubjects: el.uniSubjects,
         feedbacks: mapperReview(el.feedbacks),
+        feedbackIsLeaved: el.feedbackIsLeaved,
     }))
 } 

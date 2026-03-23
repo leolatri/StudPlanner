@@ -1,6 +1,6 @@
 import {
     Text,
-    View, 
+    View,
     TextStyle,
     StyleProp,
     StyleSheet,
@@ -8,10 +8,15 @@ import {
 } from "react-native";
 import Input from "../input/Input";
 import Button from "../button/Button";
-import {colors, generalStyles} from "../../GeneralStyles";
+import { colors, generalStyles } from "../../GeneralStyles";
+
+type Field = {
+    name: string;
+    value: string;
+}
 
 interface FormProps {
-    fields: string[];
+    fields: Field[];
     indexPasswordField?: number;
     sectionName?: {
         label: string;
@@ -33,7 +38,12 @@ const Form = ({ fields, button, sectionName, additionButton, indexPasswordField 
             {sectionName && <Text style={[generalStyles.title, sectionName.style]}>{sectionName.label}</Text>}
             <View style={st().form__block}>
                 {fields.map((el, index) => (
-                    <Input label={el} key={el} isPassword={indexPasswordField === index} />
+                    <Input
+                        label={el.name}
+                        key={el.name}
+                        value={el.value}
+                        isPassword={indexPasswordField === index}
+                    />
                 ))}
                 {button &&
                     <Button

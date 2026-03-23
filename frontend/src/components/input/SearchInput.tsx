@@ -11,31 +11,33 @@ interface SearchInputProps {
 
 const SearchInput = ({ query, onChange }: SearchInputProps) => {
     const [active, setActive] = useState(false);
-    
+
     const deleteContent = () => {
         onChange('');
         setActive(false);
     }
 
     return (
-        <View
-            style={[st.search, active && { borderColor: colors.textWhite }]}
-            onFocus={() => setActive(true)}
-            onBlur={() => setActive(false)}
-        >
-            <Loupe width={17} height={17} rotate={180} fill={active ? colors.textWhite : colors.gray} />
-
-            <TextInput
-                value={query}
-                placeholder="Поиск"
-                onChangeText={onChange}
-                style={st.search__input}
+        <View style={{paddingHorizontal: 20}}>
+            <View
+                style={[st.search, active && { borderColor: colors.textWhite }]}
+                onFocus={() => setActive(true)}
                 onBlur={() => setActive(false)}
-                placeholderTextColor={'rgba(148, 148, 148, 0.43)'}
-            />
-            <TouchableOpacity style={st.search__cross} onPress={deleteContent}>
-                <Cross width={17} height={17} />
-            </TouchableOpacity>
+            >
+                <Loupe width={17} height={17} rotate={180} fill={active ? colors.textWhite : colors.gray} />
+
+                <TextInput
+                    value={query}
+                    placeholder="Поиск"
+                    onChangeText={onChange}
+                    style={st.search__input}
+                    onBlur={() => setActive(false)}
+                    placeholderTextColor={'rgba(148, 148, 148, 0.43)'}
+                />
+                <TouchableOpacity style={st.search__cross} onPress={deleteContent}>
+                    <Cross width={17} height={17} />
+                </TouchableOpacity>
+            </View>
         </View>
     )
 };
@@ -74,7 +76,7 @@ const st = StyleSheet.create({
         height: '100%',
 
         justifyContent: 'center',
-        alignItems:'center',
+        alignItems: 'center',
     }
 });
 

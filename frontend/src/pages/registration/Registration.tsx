@@ -4,15 +4,48 @@ import Button from "../../components/button/Button";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../../GeneralStyles";
+import { UserModel } from "../../models/types";
+import { observer } from "mobx-react-lite";
 
 
 interface RegProps {
-    paddingBottom?: number
+    paddingBottom?: number;
+    data?: UserModel;
 }
 
-const Registration = ({ paddingBottom }: RegProps) => {
-    const generalFields = ['Фамилия', 'Имя', 'Отчество', 'Почта', 'Пароль'];
-    const addFields = ['Номер телефона', 'Телеграм (без @)'];
+const Registration = observer(({ paddingBottom, data }: RegProps) => {
+    const genFields = [
+        {
+          name: 'Фамилия',
+          value: data?.secondName || '',
+        },
+        {
+          name: 'Имя',
+          value: data?.firstName || '',
+        },
+        {
+          name: 'Отчество',
+          value: data?.middleName || '',
+        },
+        {
+          name: 'Почта',
+          value: data?.email || '',
+        },
+        {
+          name: 'Пароль',
+          value: data?.password || '',
+        },
+    ];
+    const addFields = [
+        {
+          name: 'Номер телефона',
+          value: data?.phoneNumber || '',
+        },
+        {
+          name: 'Телеграм (без @)',
+          value: data?.telegram || '',
+        },
+    ];
     const navigation = useNavigation();
 
     return (
@@ -31,7 +64,7 @@ const Registration = ({ paddingBottom }: RegProps) => {
             showsVerticalScrollIndicator={false}
         >
             <Form
-                fields={generalFields}
+                fields={genFields}
                 sectionName={{ label: 'Обязательные поля', style: st.label }}
             />
             <Form
@@ -45,7 +78,7 @@ const Registration = ({ paddingBottom }: RegProps) => {
             />
         </KeyboardAwareScrollView>
     )
-};
+});
 
 const st = StyleSheet.create({
     regBlock: {

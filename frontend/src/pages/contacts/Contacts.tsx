@@ -18,18 +18,19 @@ const Contacts = observer(() => {
                 <FlatList
                     style={{ flex: 1, alignSelf: 'stretch' }}
                     contentContainerStyle={st.contacts_list}
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
                     // ListEmptyComponent={}
                     data={contactsStore.filteredContacts}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item }) => (
                         <ContactCard
                             id={item.id}
+                            img={item.img}
                             fio={item.fio}
                             email={item.email}
-                            uniSubjects={item.uniSubjects}
                             feedbacks={item.feedbacks}
-                            img={item.img}
+                            uniSubjects={item.uniSubjects}
+                            feedbackIsLeaved={item.feedbackIsLeaved}
                         />
                     )}
                 />
@@ -43,12 +44,13 @@ const Contacts = observer(() => {
 const st = StyleSheet.create({
     contacts: {
         flex: 1,
-        padding: 20,
+        // padding: 20,
         gap: 20,
     },
     contacts_list: {
         paddingTop: 20,
         paddingBottom: 80,
+        paddingHorizontal: 20,
 
         gap: 15,
     },
