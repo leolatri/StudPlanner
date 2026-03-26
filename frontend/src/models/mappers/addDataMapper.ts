@@ -1,4 +1,4 @@
-import { AddintionDataDTO } from "../../api/types";
+import { AddintionDataDTO } from "../../services/types";
 import mapperContacts from "./contactsMapper";
 import mapperGroups from "./groupsMapper";
 import { AddDataModel } from "../types";
@@ -12,7 +12,7 @@ export default function mapperAddData(rowData?: AddintionDataDTO): AddDataModel 
         {
             library: mapperBook(rowData.library),
             contacts: mapperContacts(rowData.contacts),
-            gropList: mapperGroups(rowData.gropList),
+            groupList: mapperGroups(rowData.groupList),
             subjects: mapperSubjects(rowData.subjects),
         }
     );

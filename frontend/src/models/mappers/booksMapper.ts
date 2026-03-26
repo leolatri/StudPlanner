@@ -1,4 +1,4 @@
-import { BookDTO } from "../../api/types";
+import { BookDTO } from "../../services/types";
 import { BookModel, BooksCollection } from "../types";
 
 function editFullName(fullName: string) {

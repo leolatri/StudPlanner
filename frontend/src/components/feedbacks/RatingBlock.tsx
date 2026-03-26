@@ -126,15 +126,16 @@ const st = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'nowrap',
         gap: 30,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
 
         borderBottomWidth: 0.5,
     },
     overallFeedback__block: {
-        width: '70%',
+        width: '50%',
         height: 'auto',
-        gap: 0,
+        gap: 5,
+        justifyContent: 'flex-end',
     },
     overallFeedback__img: {
         width: 45,
@@ -197,14 +198,14 @@ const st = StyleSheet.create({
         gap: 15,
     },
     subjects__text: {
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        paddingHorizontal: 11,
+        paddingVertical: 6,
 
         borderRadius: 8,
         backgroundColor: colors.darkBlue,
 
         fontFamily: "Montserrat-Regular",
-        fontSize: 11,
+        fontSize: 12,
         color: colors.textWhite,
         alignSelf: "flex-start",
     }

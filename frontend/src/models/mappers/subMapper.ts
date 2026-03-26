@@ -1,4 +1,4 @@
-import { SubjectDTO } from "../../api/types";
+import { SubjectDTO } from "../../services/types";
 import { SubjectModel } from "../types";
 
 const parseDate = (fullDate: number, duration?: number, timezone: string = 'UTC') => {

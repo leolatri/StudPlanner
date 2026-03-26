@@ -5,8 +5,8 @@ import { FeedbackModel } from "../../models/types";
 const Comment = ({isPersonal, autor, text}: FeedbackModel) => {
     return (
         <View style={st.comment}>
-            <Text style={[generalStyles.title, {color: isPersonal ? 'rgb(101, 55, 128)' : colors.generalBlue, fontSize: 12}]}>{autor}</Text>
-            <Text style={[generalStyles.title, {fontSize: 12}]}>{text}</Text>
+            <Text style={[generalStyles.usualText, {color: isPersonal ? 'rgb(101, 55, 128)' : colors.generalBlue}]}>{autor}</Text>
+            <Text style={[generalStyles.usualText, {fontSize: 12}]}>{text}</Text>
         </View>
     );
 };

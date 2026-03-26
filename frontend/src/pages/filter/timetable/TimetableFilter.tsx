@@ -8,6 +8,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/types";
 import { useNavigation } from "@react-navigation/native";
 import { useStore } from "../../../stores/StoreContext";
+import EmptyPage from "../../empty/EmptyPage";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterTimetable">;
 
@@ -57,7 +58,7 @@ const TimetableFilter = observer(() => {
     return (
         <ScrollView style={{ flex: 1 }} contentContainerStyle={st.filter}>
             <Text style={[generalStyles.text, { fontSize: 12, alignSelf: 'flex-start' }]}>ГРУППЫ</Text>
-            {groupsStors.selectedGroups.map((el) => (
+            {groupsStors.selectedGroups.length > 0 ? groupsStors.selectedGroups.map((el) => (
                 <GroupItem
                     id={el.id}
                     key={el.id}
@@ -66,7 +67,10 @@ const TimetableFilter = observer(() => {
                     setActive={handleActivity}
                     onRemove={removeGroup}
                 />
-            ))}
+            )) : 
+                <EmptyPage type="book" text="Здесь пока пусто.   Добавьте группу"/>
+            }
+                   
             <Button
                 label="Добавить группу"
                 func={() => navigation.navigate('groupSearchPage')}

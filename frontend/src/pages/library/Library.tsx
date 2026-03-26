@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useStore } from "../../stores/StoreContext";
 import { observer } from "mobx-react-lite";
 import EmptyPage from "../empty/EmptyPage";
-import { colors } from "../../GeneralStyles";
 
 type Nav = NativeStackNavigationProp<RootStackParamList, "filterLibrary">;
 
@@ -32,7 +31,9 @@ const Library = observer(() => {
                     keyExtractor={(item) => item.id}
                     persistentScrollbar={true}
                     data={libraryStore.filteredBooks}
-                    // ListEmptyComponent={}
+                    ListEmptyComponent={() => {
+                        <EmptyPage type="book" text="Здесь пока пусто"/>
+                    }}
                     ListHeaderComponent={
                         <Button
                             label="Добавить материал"

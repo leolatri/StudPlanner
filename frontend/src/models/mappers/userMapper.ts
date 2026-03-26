@@ -1,4 +1,4 @@
-import { UserDTO } from "../../api/types";
+import { UserDTO } from "../../services/types";
 import { UserModel } from "../types";
 
 export default function mapperUser(rowData?: UserDTO): UserModel {

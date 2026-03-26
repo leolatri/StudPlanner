@@ -25,7 +25,7 @@ class GroupsStore {
             runInAction(() => {
                 this.error = error;
             })
-            console.log('Error with fetching Grops', error);
+            console.log('Error with fetching Groups', error);
         } finally {
             runInAction(() => {
                 this.loading = false;

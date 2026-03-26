@@ -11,6 +11,9 @@
     "android": {
       "package": "com.alena3003.studplanner",
       "softwareKeyboardLayoutMode": "resize"
-    }
+    },
+    "plugins": [
+      "expo-sqlite"
+    ]
   }
 }

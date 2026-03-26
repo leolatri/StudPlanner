@@ -1,4 +1,4 @@
-import { ContactDTO } from "../../api/types";
+import { ContactDTO } from "../../services/types";
 import { ContactModel } from "../types";
 import mapperReview from "./feedbackMapper";
 

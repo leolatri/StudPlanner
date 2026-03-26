@@ -88,7 +88,7 @@ class ContactsStore {
 
         feedbacks.forEach((el) => sum += el.grade);
 
-        const res = Math.floor(Math.floor((sum / feedbacks.length) * 10) / 10);
+        const res = Math.floor((sum / feedbacks.length) * 10) / 10;
 
         return res;
     }

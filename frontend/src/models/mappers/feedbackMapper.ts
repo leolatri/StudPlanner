@@ -1,4 +1,4 @@
-import { FeedbackDTO } from "../../api/types";
+import { FeedbackDTO } from "../../services/types";
 import { FeedbackModel } from "../types";
 
 export default function mapperFeedbacks(rowData?: FeedbackDTO[]): FeedbackModel[] {

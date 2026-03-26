@@ -57,7 +57,7 @@ export interface UserDTO {
 
 export interface AddintionDataDTO {
     library: BookDTO[];
-    gropList: GroupDTO[];
+    groupList: GroupDTO[];
     contacts: ContactDTO[];
     subjects: SubjectDTO[];
 }

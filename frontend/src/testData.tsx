@@ -1,9 +1,8 @@
-import { ImageSourcePropType } from 'react-native';
-import { BookDTO, ContactDTO, SubjectDTO, GroupDTO, UserDTO, AddintionDataDTO, FeedbackDTO } from './api/types'; // предположим, что интерфейсы лежат в этом файле
-import vor from '../assets/test/voron.png';
-import kur from '../assets/test/kurav.png';
+import { BookDTO, ContactDTO, SubjectDTO, GroupDTO, UserDTO, AddintionDataDTO, FeedbackDTO } from './services/types'; 
 import mik from '../assets/test/mikh.png';
 import luk from '../assets/test/lukin.png';
+import vor from '../assets/test/voron.png';
+import kur from '../assets/test/kurav.png';
 
 const testReviews1: FeedbackDTO[] = [
   {
@@ -37,14 +36,14 @@ const testReviews1: FeedbackDTO[] = [
   {
     id: "5",
     text: "Замечательные примеры, всё понятно и доступно",
-    grade: 5,
+    grade: 1,
     autor: "Николаев Дмитрий",
     isPersonal: false,
   },
   {
     id: "6",
-    text: "Купил по совету преподавателя, не пожалел",
-    grade: 5,
+    text: " по совету преподавателя, не пожалел",
+    grade: 1,
     autor: "Михайлов Алексей",
     isPersonal: false,
   },
@@ -479,7 +478,7 @@ export const testUser: UserDTO = {
 
 export const testAdditionData: AddintionDataDTO = {
   library: testBooks,
-  gropList: testGroups,
+  groupList: testGroups,
   contacts: testContacts,
   subjects: testSubjects,
 };
@@ -488,7 +487,7 @@ export const testAdditionData: AddintionDataDTO = {
 export const testFullUserData = {
   ...testUser,
   library: testBooks,
-  gropList: testGroups,
+  groupList: testGroups,
   contacts: testContacts,
   subjects: testSubjects,
 };

@@ -57,6 +57,7 @@ export const generalStyles = StyleSheet.create({
         fontSize: 12,
         color: colors.textWhite,
         fontWeight: '300',
+        lineHeight: 20,
     },
 });
 

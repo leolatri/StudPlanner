@@ -18,7 +18,7 @@ const SearchInput = ({ query, onChange }: SearchInputProps) => {
     }
 
     return (
-        <View style={{paddingHorizontal: 20}}>
+        <View style={{paddingHorizontal: 20, width: '100%'}}>
             <View
                 style={[st.search, active && { borderColor: colors.textWhite }]}
                 onFocus={() => setActive(true)}

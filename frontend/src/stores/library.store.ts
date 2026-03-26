@@ -3,6 +3,7 @@ import { BookModel, BooksCollection, FilterValue } from '../models/types';
 import { testBooks } from '../testData';
 import mapperBooks from '../models/mappers/booksMapper';
 import RootStore from './root.store';
+import BooksAPI from '../services/api/books';
 
 class LibraryStore {
     books: BooksCollection = {
@@ -23,10 +24,10 @@ class LibraryStore {
     async loadBooks() {
         this.loading = true;
         try {
-            // const response = await api.get<BookDTO[]>('/books');
+            const response = await BooksAPI.getAllBooks();
             // this.books = mapperBook(response.data);
             runInAction(() => {
-                this.books = mapperBooks(testBooks);
+                this.books = mapperBooks(response);
             })
         } catch (error: any) {
             runInAction(() => {

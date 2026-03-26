@@ -30,7 +30,7 @@ const Email = ({ email }: { email: string }) => {
     return (
         <View style={st.email}>
             <EmailImg width={22} height={22} stroke={colors.generalBlue}/>
-            <Text style={[generalStyles.text, {fontSize: 12}]}>{email}</Text>
+            <Text style={generalStyles.usualText}>{email}</Text>
         </View>
     );
 };
@@ -45,7 +45,7 @@ const BottomChat = ({functionPress}: {functionPress: () => void}) => {
         <TouchableOpacity style={st.bottomChat} onPress={handlePress}>
             <View style={st.bottomChat__block}>
                 <ChatIcon width={22} height={22} stroke={colors.generalBlue}/>
-                <Text style={[generalStyles.text, {fontSize: 12, color: colors.generalBlue}]}>Оставить отзыв</Text>
+                <Text style={[generalStyles.usualText, {color: colors.generalBlue}]}>Оставить отзыв</Text>
             </View>
             <Arrow style={st.arrow} strokeWidth={5}/> 
         </TouchableOpacity>
@@ -60,7 +60,7 @@ const ContactCard = ({ id, img, fio, email, uniSubjects }: ContactModel) => {
     return (
         <View style={st.contactCard}>
             <View style={st.contactCard__container}>
-                <Text style={st.contactCard__fio}>{fio}</Text>
+                <Text style={[generalStyles.text, {fontWeight: '700'}]}>{fio}</Text>
                 <View style={st.contactCard__block}>
                     <Image style={st.contactCard__img} source={img} />
                     <Subjects arr={uniSubjects} />
@@ -95,12 +95,6 @@ const st = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 20,
-    },
-    contactCard__fio: {
-        fontFamily: "Montserrat-Regular",
-        fontSize: 13,
-        color: colors.textWhite,
-        fontWeight: '600',
     },
     subjects: {
         flex: 1,

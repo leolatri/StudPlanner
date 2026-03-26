@@ -1,4 +1,4 @@
-import { GroupDTO } from "../../api/types";
+import { GroupDTO } from "../../services/types";
 import { GroupModel, GroupsCollection } from "../types";
 
 export default function mapperGroups(rowData?: GroupDTO[]): GroupsCollection {
