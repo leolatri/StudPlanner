@@ -25,7 +25,6 @@ class LibraryStore {
         this.loading = true;
         try {
             const response = await BooksAPI.getAllBooks();
-            // this.books = mapperBook(response.data);
             runInAction(() => {
                 this.books = mapperBooks(response);
             })

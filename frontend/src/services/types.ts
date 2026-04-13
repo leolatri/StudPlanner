@@ -5,6 +5,7 @@ export interface BookDTO {
     name: string;
     autors: string[];
     isPersonal: boolean;
+    url: string;
 };
 
 export interface FeedbackDTO {
@@ -18,7 +19,7 @@ export interface FeedbackDTO {
 export interface ContactDTO {
     id: string;
     // img: string; нужно потом для исп из бд
-    img: ImageSourcePropType;
+    img: ImageSourcePropType | string;
     fio: string;
     email: string;
     uniSubjects: string[];

@@ -4,6 +4,7 @@ import { testSubjects } from '../testData';
 import mapperSubjects from '../models/mappers/subMapper';
 import GroupsStore from './groups.store';
 import RootStore from './root.store';
+import SubjectsAPI from '../services/api/subjects';
 
 class TimetableStore {
     groupStore: GroupsStore;
@@ -21,9 +22,9 @@ class TimetableStore {
     async loadSubjects() {
         this.loading = true;
         try {
-            //get ...
+            const data = await SubjectsAPI.getAllSubjects();
             runInAction(() => {
-                this.subjects = mapperSubjects(testSubjects);
+                this.subjects = mapperSubjects(data);
             })
         } catch (error: any) {
             runInAction(() => this.error = error)

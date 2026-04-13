@@ -47,6 +47,7 @@ const Library = observer(() => {
                             name={item.name}
                             autors={item.autors}
                             isPersonal={item.isPersonal}
+                            url={item.url}
                         />
                     )}
                 />

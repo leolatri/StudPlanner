@@ -13,6 +13,7 @@ export interface BookModel {
     name: string;
     autors: string[];
     isPersonal: boolean;
+    url: string;
 };
 
 export interface FeedbackModel {
@@ -28,7 +29,7 @@ export interface ContactModel {
     fio: string;
     email: string;
     uniSubjects: string[];
-    img: ImageSourcePropType;
+    img: ImageSourcePropType | string;
     feedbacks: FeedbackModel[];
     feedbackIsLeaved: boolean;
 
@@ -81,7 +82,7 @@ export interface GroupsCollection {
 
 export interface AddDataModel {
     library: BooksCollection;
-    gropList: GroupsCollection;
+    groupList: GroupsCollection;
     contacts: ContactModel[];
     subjects: SubjectModel[];
 }

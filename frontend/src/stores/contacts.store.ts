@@ -2,6 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { ContactModel, FeedbackModel } from '../models/types';
 import { testContacts } from '../testData';
 import mapperContacts from '../models/mappers/contactsMapper';
+import ContactsAPI from '../services/api/contacts';
 
 class ContactsStore {
     contacts: ContactModel[] = [];
@@ -20,11 +21,13 @@ class ContactsStore {
     async loadContacts() {
         this.loading = true;
         try {
-            //get ...
+            const data = await ContactsAPI.getAllContacts();
+            console.log('RAW API response:', JSON.stringify(data, null, 2));
             runInAction(() => {
-                this.contacts = mapperContacts(testContacts);
+                this.contacts = mapperContacts(data);
             })
         } catch (error: any) {
+            console.log('ERROR');
             runInAction(() => {
                 this.error = error;
             })

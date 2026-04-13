@@ -31,6 +31,7 @@ export default function mapperBooks(rowData?: BookDTO[]): BooksCollection {
             name: el.name,
             autors: el.autors.map((el) => editFullName(el)),
             isPersonal: el.isPersonal,
+            url: el.url
         }
     ));
 

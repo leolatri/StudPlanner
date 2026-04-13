@@ -6,7 +6,7 @@ import { colors, generalStyles } from "../../GeneralStyles";
 import File from '../../../assets/pdf.svg';
 import Dowload from '../../../assets/download.svg';
 
-const BookCard = ({ name, autors }: BookModel) => {
+const BookCard = ({ name, autors, url }: BookModel) => {
     return (
         <View style={st.bookCard}>
             <File width={50} height={50} fill={colors.generalBlue}/>
