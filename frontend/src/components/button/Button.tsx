@@ -4,18 +4,19 @@ import {generalStyles, colors} from '../../GeneralStyles';
 
 interface Props{
     label?: string;
-    func: () => void;
+    func: () => void | Promise<void>;
     icon?: ImageSourcePropType,
     style?: StyleProp<ViewStyle>,
     textStyle?: StyleProp<TextStyle>,
+    disable?: boolean,
 }
 
-const Button = ({label, func, style, textStyle, icon}: Props) => {
+const Button = ({label, func, style, textStyle, icon, disable}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={func}
-      style={[!icon &&  st.button, style]}
+      onPress={ disable ? () => {} : func}
+      style={[!icon &&  st.button, style, disable && st['button--disable']]}
     > 
       {icon && <Image source={icon} style={st.button__icon}/>}
       {label && <Text style={[generalStyles.usualText, textStyle]}>
@@ -35,6 +36,9 @@ const st = StyleSheet.create({
 
     borderRadius: 15,
     backgroundColor: colors.generalBlue,
+  },
+  'button--disable': {
+    opacity: 0.5
   },
   button__icon: {
     width: 30,

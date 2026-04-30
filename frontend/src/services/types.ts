@@ -3,8 +3,8 @@ import { ImageSourcePropType } from "react-native";
 export interface BookDTO {
     id: string;
     name: string;
+    owner_id: string | null;
     autors: string[];
-    isPersonal: boolean;
     url: string;
 };
 
@@ -19,7 +19,7 @@ export interface FeedbackDTO {
 export interface ContactDTO {
     id: string;
     // img: string; нужно потом для исп из бд
-    img: ImageSourcePropType | string;
+    img: string;
     fio: string;
     email: string;
     uniSubjects: string[];
@@ -36,6 +36,7 @@ export interface SubjectDTO {
     duration: number;
     professor: string;
     timeAndDate: number;
+    groups: string[]
 };
 
 export interface GroupDTO {
@@ -49,11 +50,12 @@ export interface UserDTO {
     id: string;
     email: string;
     password: string;
-    firstName: string;
-    middleName: string;
-    secondName: string;
+    first_name: string;
+    middle_name: string;
+    second_name: string;
     telegram: string | null;
-    phoneNumber: string | null;
+    phone_number: string | null;
+    is_admin: boolean;
 }
 
 export interface AddintionDataDTO {

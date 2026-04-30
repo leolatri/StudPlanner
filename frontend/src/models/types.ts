@@ -12,6 +12,7 @@ export interface BookModel {
     id: string;
     name: string;
     autors: string[];
+    owner_id: string | null;
     isPersonal: boolean;
     url: string;
 };
@@ -29,7 +30,7 @@ export interface ContactModel {
     fio: string;
     email: string;
     uniSubjects: string[];
-    img: ImageSourcePropType | string;
+    img: ImageSourcePropType;
     feedbacks: FeedbackModel[];
     feedbackIsLeaved: boolean;
 
@@ -45,6 +46,8 @@ export interface SubjectModel {
     startTime: string;
     endTime: string;
     date: string;
+    groups: string[];
+    timeAndDate: number;
 }
 
 export interface GroupModel {
@@ -58,11 +61,12 @@ export interface UserModel {
     id: string;
     email: string;
     password: string;
-    firstName: string;
-    middleName: string;
-    secondName: string;
+    first_name: string;
+    middle_name: string;
+    second_name: string;
     telegram: string | null;
-    phoneNumber: string | null;
+    phone_number: string | null;
+    is_admin: boolean;
 
     // personLibrary: BookModel[];
     // selectedGrops: GroupModel[];

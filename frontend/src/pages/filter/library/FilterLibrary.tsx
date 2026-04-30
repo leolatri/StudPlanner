@@ -44,7 +44,7 @@ const LibraryFilter = () => {
             {filterItems.map((el, index) => (
                 <Item
                     id={el.value}
-                    key={index}
+                    key={`${index}+${el}`}
                     label={el.label}
                     isActive={el.value === activeFilter}
                     setActive={handleFilter}

@@ -1,4 +1,4 @@
-import { AddintionDataDTO } from "../types";
+import { AddintionDataDTO, GroupDTO } from "../types";
 import { apiClient } from "./client";
 import apiUrls from "../urls";
 
@@ -8,6 +8,11 @@ class AddDataAPI {
         return data;
     };
 
+    async getGroups(): Promise<GroupDTO[]> {
+        const data = await apiClient.get<GroupDTO[]>(apiUrls.groups);
+        return data;
+    };
+
 };
 
-export default new AddDataAPI;
+export default new AddDataAPI();

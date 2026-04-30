@@ -1,19 +1,43 @@
 {
   "expo": {
-    "name": "СтудПланнер",
+    "name": "StudPlanner",
     "slug": "studplanner",
+    "version": "1.0.0",
+    "orientation": "portrait",
     "icon": "./assets/IconApp.png",
-    "extra": {
-      "eas": {
-        "projectId": "b767b853-5698-413f-9ee7-94e04a0e08ce"
-      }
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/IconApp.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.alena3003.studplanner"
     },
     "android": {
-      "package": "com.alena3003.studplanner",
-      "softwareKeyboardLayoutMode": "resize"
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/IconApp.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.alena3003.studplanner"
+    },
+    "web": {
+      "favicon": "./assets/IconApp.png"
     },
     "plugins": [
-      "expo-sqlite"
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
     ]
   }
 }

@@ -44,6 +44,7 @@ export const generalStyles = StyleSheet.create({
         fontSize: 20,
         color: colors.textWhite,
         fontWeight: '500',
+        alignSelf:'flex-start'
     },
     text: {
         fontFamily: 'Montserrat-Regular',

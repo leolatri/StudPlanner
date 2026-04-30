@@ -1,38 +1,37 @@
-import {
-    Text,
-    View,
-    TextStyle,
-    StyleProp,
-    StyleSheet,
-    DimensionValue,
-} from "react-native";
+import { Text, View, StyleProp, StyleSheet, DimensionValue, TextStyle } from "react-native";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import { colors, generalStyles } from "../../GeneralStyles";
 
-type Field = {
+export type Field = {
     name: string;
     value: string;
+    disable: boolean;
+    setValue?: (val: string) => void;
+    placeholder?: string;
 }
 
 interface FormProps {
     fields: Field[];
+    initialValues: string[];
     indexPasswordField?: number;
     sectionName?: {
         label: string;
-        style?: StyleProp<TextStyle>,
+        style?: StyleProp<TextStyle>;
     };
     button?: {
         label: string;
-        func: () => void;
+        func: () => void | Promise<void>;
     };
     additionButton?: {
-        label: string,
-        func: () => void;
+        label: string;
+        func: () => void | Promise<void>;
     };
 }
 
-const Form = ({ fields, button, sectionName, additionButton, indexPasswordField }: FormProps) => {
+const Form = ({ fields, initialValues, button, sectionName, additionButton, indexPasswordField }: FormProps) => {
+    const isDirty = fields.some((field, idx) => field.value !== initialValues[idx]);
+
     return (
         <View style={st('10%').form}>
             {sectionName && <Text style={[generalStyles.title, sectionName.style]}>{sectionName.label}</Text>}
@@ -40,68 +39,64 @@ const Form = ({ fields, button, sectionName, additionButton, indexPasswordField 
                 {fields.map((el, index) => (
                     <Input
                         label={el.name}
-                        key={el.name}
+                        key={`${index}+${el}`}
                         value={el.value}
                         isPassword={indexPasswordField === index}
+                        disable={el.disable}
+                        setValue={el.setValue}
+                        placeholder={el.placeholder}
                     />
                 ))}
-                {button &&
-                    <Button
-                        label={button.label}
-                        func={button.func}
-                        style={st().form__button}
-                    />
-                }
                 {additionButton &&
                     <Button
                         label={additionButton.label}
                         func={additionButton.func}
                         style={st().form__addButton}
                         textStyle={st().form__addButton}
+                        disable={!isDirty}
                     />
                 }
-
             </View>
+            {button &&
+                <Button
+                    label={button.label}
+                    func={button.func}
+                    style={st().form__button}
+                    disable={!isDirty}
+                />
+            }
         </View>
-    )
+    );
 };
-
 
 const st = (heightForm?: DimensionValue) => StyleSheet.create({
     form: {
         width: '100%',
         minHeight: heightForm || 'auto',
-
         justifyContent: 'center',
+        alignItems: 'center',
         gap: 10,
     },
     form__block: {
         width: '100%',
-        // minHeight: '100%',
-
         padding: 20,
-
         gap: 10,
         alignItems: 'center',
-
         backgroundColor: colors.formBack,
         borderRadius: 10,
         elevation: 7,
     },
     form__button: {
         width: 200,
-
         marginBottom: -20,
         marginTop: 10,
     },
     form__addButton: {
         justifyContent: 'flex-end',
-
         backgroundColor: 'none',
         fontSize: 12,
         color: colors.gray,
     },
-
 });
 
 export default Form;

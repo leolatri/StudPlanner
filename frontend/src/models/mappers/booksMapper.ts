@@ -22,25 +22,14 @@ function editFullName(fullName: string) {
         : `${last} ${firstI}.`;
 }
 
-export default function mapperBooks(rowData?: BookDTO[]): BooksCollection {
-    if (!rowData) return {} as BooksCollection;
+export default function mapperBooks(rowData?: BookDTO[]): Omit<BookModel, 'isPersonal'>[] {
+    if (!rowData) return {} as BookModel[];
 
-    const allBooks: BookModel[] = rowData.map((el) => (
-        {
-            id: el.id,
-            name: el.name,
-            autors: el.autors.map((el) => editFullName(el)),
-            isPersonal: el.isPersonal,
-            url: el.url
-        }
-    ));
-
-    const personalBooks = allBooks.filter((el) => el.isPersonal === true);
-    const uniBooks = allBooks.filter((el) => el.isPersonal !== true);
-
-    return {
-        allBooks,
-        personalBooks,
-        uniBooks,
-    };
+    return rowData.map((el) => ({
+        id: el.id,
+        name: el.name,
+        autors: el.autors.map((el) => editFullName(el)),
+        url: el.url,
+        owner_id: el.owner_id,
+    }));
 }; 

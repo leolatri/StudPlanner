@@ -1,8 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { GroupModel, GroupsCollection } from "../models/types";
 import mapperGroups from "../models/mappers/groupsMapper";
-import { testGroups } from "../testData";
+import AddDataAPI from '../services/api/addData';
 import RootStore from "./root.store";
+import { GroupDTO } from "../services/types";
 
 class GroupsStore {
     loading: boolean = false;
@@ -12,25 +13,37 @@ class GroupsStore {
 
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
+    }
+
+    async loadData() {
         this.loadGroups();
     }
 
     async loadGroups() {
         this.loading = true;
         try {
+            const groupsData = await AddDataAPI.getGroups();
+            const groups = mapperGroups(groupsData)
             runInAction(() => {
-                this.groups = mapperGroups(testGroups);
-            })
+                this.groups = {
+                    allGroups: groups.allGroups,
+                    notSelectedGroups: groups.notSelectedGroups,
+                    selectedGroups: groups.selectedGroups
+                };
+            });
         } catch (error: any) {
-            runInAction(() => {
-                this.error = error;
-            })
+            runInAction(() => { this.error = error; });
             console.log('Error with fetching Groups', error);
         } finally {
-            runInAction(() => {
-                this.loading = false;
-            })
+            runInAction(() => { this.loading = false; });
         }
+    }
+
+    addGroup(group: GroupDTO) {
+        if (this.allGroups.some((el) => el.name.toLowerCase().trim() === group.name.toLowerCase().trim())) {
+            return this.allGroups
+        }
+        runInAction(() => this.allGroups.push(group))
     }
 
     setSearchQuery(val: string) {
@@ -48,7 +61,7 @@ class GroupsStore {
         return notSelectedGroups.filter((el) => el.name.toLowerCase().includes(query));
     }
 
-    
+
     toggleGroupSelection(id: string) {
         if (!this.groups) return;
 

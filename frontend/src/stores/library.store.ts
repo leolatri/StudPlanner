@@ -4,6 +4,7 @@ import { testBooks } from '../testData';
 import mapperBooks from '../models/mappers/booksMapper';
 import RootStore from './root.store';
 import BooksAPI from '../services/api/books';
+import { BookDTO } from '../services/types';
 
 class LibraryStore {
     books: BooksCollection = {
@@ -15,18 +16,35 @@ class LibraryStore {
     loading = false;
     error: string | null = null;
     searchQuery: string = "";
+    rootStore: RootStore;
 
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
-        this.loadBooks();
+        this.rootStore = rootStore;
+
+    }
+
+    async loadData() {
+        await this.loadBooks();
     }
 
     async loadBooks() {
         this.loading = true;
         try {
             const response = await BooksAPI.getAllBooks();
+            const allBooks = mapperBooks(response);
+            const userId = this.rootStore.userStore.user?.user.id;
+            const enrichedBooks: BookModel[] = allBooks.map((book) => ({
+                ...book,
+                isPersonal: book.owner_id !== null && book.owner_id === userId
+            }));
+
             runInAction(() => {
-                this.books = mapperBooks(response);
+                this.books = {
+                    allBooks: enrichedBooks,
+                    uniBooks: enrichedBooks.filter((el) => !el.isPersonal),
+                    personalBooks: enrichedBooks.filter((el) => el.isPersonal),
+                }
             })
         } catch (error: any) {
             runInAction(() => {
@@ -42,8 +60,6 @@ class LibraryStore {
 
     setSearchQuery(val: string) {
         this.searchQuery = val;
-        console.log(this.searchQuery);
-        console.log(val);
     }
 
     get filteredBooks(): BookModel[] {
@@ -69,9 +85,33 @@ class LibraryStore {
         return filteredBooks;
     }
 
-    addBook(book: BookModel) {
-        this.books.personalBooks.push(book);
-        this.books.allBooks.push(book);
+    async addBook(book: Omit<BookDTO, "id">) {
+        this.loading = true;
+        try {
+            const newBookDTO = await BooksAPI.addBook(book);
+            const userId = this.rootStore.userStore.user?.user.id;
+            const newBookModel: BookModel = {
+                id: newBookDTO.id,
+                name: newBookDTO.name,
+                autors: newBookDTO.autors,
+                url: newBookDTO.url,
+                owner_id: newBookDTO.owner_id,
+                isPersonal: newBookDTO.owner_id !== null && newBookDTO.owner_id === userId,
+            };
+            runInAction(() => {
+                this.books.allBooks.push(newBookModel);
+                if (newBookModel.isPersonal) {
+                    this.books.personalBooks.push(newBookModel);
+                } else {
+                    this.books.uniBooks.push(newBookModel);
+                }
+            });
+        } catch (error) {
+            console.log(error);
+            throw error;
+        } finally {
+            runInAction(() => { this.loading = false; });
+        }
     }
 
     removeBook(id: string) {

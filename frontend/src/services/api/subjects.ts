@@ -8,7 +8,19 @@ class SubjectsAPI {
         if (date) {
             url += `?date=${date}`;
         }
-        return apiClient.get<SubjectDTO[]>(url);
+        return await apiClient.get<SubjectDTO[]>(url);
+    }
+
+    async addSubject(data: Omit<SubjectDTO, 'id'>): Promise<SubjectDTO> {
+        return apiClient.post<SubjectDTO>('/admin/subjects', data);
+    }
+
+    async deleteSubject(subjectId: string): Promise<void> {
+        await apiClient.delete(`/admin/subjects/${subjectId}`);
+    }
+
+    async deleteDay(time: number): Promise<void> {
+        await apiClient.delete(`/admin/subjects/by-date?date=${time}`);
     }
 };
 

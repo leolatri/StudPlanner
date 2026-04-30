@@ -9,25 +9,31 @@ interface InputProps {
     style?: StyleProp<ViewStyle>;
     type?: string;
     value?: string;
+    setValue?: (val: string) => void;
+    disable?: boolean;
 }
 
-const Input = ({ label, isPassword, placeholder, style, type, value }: InputProps) => {
-    const [focused, setFocused] = useState(false);
+const Input = ({ label, isPassword, placeholder, style, type, value, setValue, disable = false }: InputProps) => {
+    // const [focused, setFocused] = useState(false);
     return (
-        <View style={st.inputBlock}>
-            {label && <Text style={[st.inputBlock__label, focused && { color: colors.textWhite }]}>{label}</Text>}
+        <View style={[st.inputBlock, disable && {opacity: 0.5}]}>
+            {label && <Text style={[st.inputBlock__label]}>{label}</Text>}
             <TextInput
                 placeholder={placeholder || ""}
-                onFocus={() => setFocused(true)}
-                onBlur={() => setFocused(false)}
+                // onFocus={() => !disable && setFocused(true)}
+                // onBlur={() => setFocused(false)}
+                showSoftInputOnFocus={!disable}
+                caretHidden={disable}
                 underlineColorAndroid="transparent"
                 secureTextEntry={isPassword || false}
                 placeholderTextColor={colors.gray}
                 textAlignVertical="top"
                 scrollEnabled={false}
                 value={value}
+                onChangeText={setValue}
+                // editable={disable}
                 multiline={type === 'textarea'}
-                style={[st.inputBlock__input, style, focused && { borderColor: colors.textWhite }]}
+                style={[st.inputBlock__input, style]}
             />
         </View>
     )
@@ -48,7 +54,7 @@ const st = StyleSheet.create({
     inputBlock__label: {
         fontFamily: 'Montserrat-Regular',
         fontSize: 12,
-        color: colors.gray,
+        color: colors.textWhite,
         fontWeight: '400',
     },
     inputBlock__input: {
@@ -59,7 +65,7 @@ const st = StyleSheet.create({
 
         borderRadius: 9,
         borderWidth: 1,
-        borderColor: colors.gray,
+        borderColor: colors.textWhite,
         padding: 12,
 
         textAlignVertical: 'top',

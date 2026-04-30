@@ -9,11 +9,12 @@ export default function mapperUser(rowData?: UserDTO): UserModel {
             id: rowData.id,
             email: rowData.email,
             password: rowData.password,
-            firstName: rowData.firstName,
-            middleName: rowData.middleName,
-            secondName: rowData.secondName,
+            first_name: rowData.first_name,
+            middle_name: rowData.middle_name,
+            second_name: rowData.second_name,
             telegram: rowData.telegram,
-            phoneNumber: rowData.phoneNumber,
+            phone_number: rowData.phone_number,
+            is_admin: rowData.is_admin,
         }
     )
 };

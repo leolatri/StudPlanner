@@ -19,7 +19,7 @@ const Subjects = ({ arr }: { arr: string[] }) => {
         <View style={st.subjects}>
             <View style={st.subjects__textBlock}>
                 <Text style={st.subjects__text}>{sortArr[0]}</Text>
-                <Text style={st.subjects__text}>{sortArr[1]}</Text>
+                {arr.length > 1 && <Text style={st.subjects__text}>{sortArr[1]}</Text>}
                 {count > 0 && <Text style={st.subjects__text}>{ `+ ${count}`}</Text>}
             </View>
         </View>

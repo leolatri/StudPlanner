@@ -3,16 +3,19 @@ import { SubjectModel } from "../../models/types";
 import Person from '../../../assets/profile.svg';
 import { colors } from "../../GeneralStyles";
 import Door from '../../../assets/door.svg';
+import People from '../../../assets/people.svg';
 
 const Info = ({ icon, text }: { icon: string, text: string }) => (
     <View style={st.info}>
-        {icon === "door" ? <Door width={17} height={17} fill={colors.generalBlue} /> : <Person width={18} height={18} stroke={colors.generalBlue} strokeWidth={1} />}
+        {icon === "door" ? <Door width={17} height={17} fill={colors.generalBlue} /> 
+        : (icon === 'people' ? <People width={18} height={18} stroke={colors.generalBlue} strokeWidth={1}/>
+        : <Person width={18} height={18} stroke={colors.generalBlue} strokeWidth={1} />)}
         <Text style={[{fontSize: 12}, st.text]}>{text}</Text>
     </View>
 );
 
 const SubjectCard = ({
-    id, type, name, room, index, professor, startTime, endTime, date,
+    id, type, name, room, index, professor, startTime, endTime, date, groups
 }: SubjectModel) => {
     return (
         <View style={st.subjectCard}>
@@ -26,6 +29,7 @@ const SubjectCard = ({
             <View style={st.subjectCard__info}>
                 <Info icon="door" text={room} />
                 <Info icon="professor" text={professor} />
+                <Info icon='people' text={groups.join('  ')}/>
             </View>
         </View>
     )

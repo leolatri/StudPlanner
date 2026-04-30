@@ -68,7 +68,7 @@ const TimetableFilter = observer(() => {
                     onRemove={removeGroup}
                 />
             )) : 
-                <EmptyPage type="book" text="Здесь пока пусто.   Добавьте группу"/>
+                <EmptyPage type="file" text="Здесь пока пусто.   Добавьте группу"/>
             }
                    
             <Button

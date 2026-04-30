@@ -19,8 +19,11 @@ interface CalendarWeek {
     days: (CalendarDayWithDate | null)[];
     startDate: Date;
 }
+interface CalendarProps {
+    onDateSelect?: (date: Date) => void;
+}
 
-const Calendar = () => {
+const Calendar = ({ onDateSelect }: CalendarProps) => {
     const {
         year,
         month,
@@ -30,22 +33,22 @@ const Calendar = () => {
         previousMonth,
         isDateSelected,
     } = useCalendar({
-        onDateSelect: (date: Date) => console.log('Выбрана дата:', date),
+        onDateSelect: (date: Date) => {
+            if (onDateSelect) onDateSelect(date);
+        },
         initialSelectedDate: new Date(),
     });
 
     const [show, setShow] = useState(true);
-
     const toggleShow = () => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setShow((prev) => !prev);
-    }
+    };
 
     const monthNames = [
         'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
         'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
     ];
-
     const weekHeaders = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
     const getMondayOfWeek = (date: Date): Date => {

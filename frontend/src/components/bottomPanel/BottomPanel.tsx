@@ -35,8 +35,8 @@ const BottomPanel = ({ setPosition, position }: Props) => {
         />
       }
       <View style={st.panel__bubbles}>
-        {bubbles.map((el) => (
-          <View style={[st.bubble, position === el && st.active]} key={el} />
+        {bubbles.map((el, index) => (
+          <View style={[st.bubble, position === el && st.active]} key={`${index}+${el}`} />
         ))}
       </View>
       {position < 3 ?
