@@ -1,0 +1,95 @@
+import { View, Text, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../navigation/types";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Button from "../button/Button";
+import { colors } from "../../GeneralStyles";
+import Arrow from "../Arrow";
+
+
+type Nav = NativeStackNavigationProp<RootStackParamList, "welcome">;
+
+interface Props {
+  position: number;
+  setPosition: (val: number) => void;
+};
+
+const BottomPanel = ({ setPosition, position }: Props) => {
+  const navigation = useNavigation<Nav>();
+  const bubbles = [0, 1, 2, 3];
+
+  const clickToNext = () => (
+    position < 3 ? setPosition(position + 1) : navigation.navigate("singIn")
+  );
+
+
+  return (
+    <View style={st.panel}>
+      {position !== 0 &&
+        <Arrow
+          color={colors.textWhite}
+          style={st.arrow}
+          rotate={180}
+          strokeWidth={8}
+          func={() => setPosition(position - 1)}
+        />
+      }
+      <View style={st.panel__bubbles}>
+        {bubbles.map((el, index) => (
+          <View style={[st.bubble, position === el && st.active]} key={`${index}+${el}`} />
+        ))}
+      </View>
+      {position < 3 ?
+        <Arrow
+          color={colors.textWhite}
+          style={st.arrow}
+          strokeWidth={8}
+          func={() => setPosition(position + 1)}
+        />
+        : <Button label={'Начать!'} func={clickToNext} />}
+    </View>
+  )
+};
+
+const st = StyleSheet.create({
+  panel: {
+    width: '90%',
+
+    flexDirection: 'row',
+    gap: 40,
+
+    borderColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  panel__arrow: {
+    // width: 50,
+    fontSize: 35,
+    color: colors.textWhite,
+  },
+  panel__bubbles: {
+    width: '40%',
+    height: '100%',
+
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+
+  },
+  bubble: {
+    width: 15,
+    height: 15,
+
+    borderRadius: 100,
+    backgroundColor: colors.gray,
+  },
+  active: {
+    backgroundColor: colors.textWhite,
+  },
+  arrow: {
+    width: 20,
+    height: 20,
+  }
+});
+
+export default BottomPanel;

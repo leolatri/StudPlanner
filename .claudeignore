@@ -6,6 +6,7 @@ eslint.config.js
 .vscode
 .venv
 database
+assets
 static
 __pycache__
 *.txt
