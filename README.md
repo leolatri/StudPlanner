@@ -26,7 +26,7 @@
 - Быстрый поиск/фильтрация
 - Просмотр занятий по дням или неделям
 - Быстрое переключение между днями
-<img width="1213" height="629" alt="image" src="https://github.com/user-attachments/assets/5b368014-2447-4f84-8ab3-6572936b64ec" />
+<img width="11620" height="4696" alt="Frame 10 (2)" src="https://github.com/user-attachments/assets/e59ab1fc-96ef-45f0-96da-46a9d7e3af38" />
 
 
 ### 📇 Контакты
@@ -34,7 +34,8 @@
 - Карточка контакта: ФИО, email, список дисциплин
 - Быстрый поиск/фильтрация
 - Прямые действия: написать отзыв о преподавателе и посмотреть существующие
-<img width="872" height="622" alt="image" src="https://github.com/user-attachments/assets/1a34efcc-06b3-41e1-a94e-f4f70c46a984" />
+<img width="11620" height="4696" alt="Group 9 (1)" src="https://github.com/user-attachments/assets/4c843efa-1e7c-40d6-8edd-92f4168c38f7" />
+
 
 
 ### 📚 Библиотека
@@ -42,7 +43,8 @@
 - Добавление новых файлов (PDF, DOCX, ссылки)
 - Просмотр или скачивание файлов для офлайн-доступа
 - Информация о файле: название, авторы
-<img width="879" height="635" alt="image" src="https://github.com/user-attachments/assets/1d2396ec-18b4-44a6-9b1a-743135af1429" />
+<img width="11620" height="4696" alt="Frame 8 (1)" src="https://github.com/user-attachments/assets/6cf949bf-1dc5-4abe-8f56-2f10646075ab" />
+
 
 
 ## Технологический стек
